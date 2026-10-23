@@ -1,0 +1,21 @@
+{
+  "name": "pumprint",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Pumprint: six open-source trench tools on one website (Kolibri Search, Moth Radar, Chameleonscope, Loxley on paper, Canary, Fomo Radar), with a 3D fingerprint you can shatter.",
+  "type": "module",
+  "main": "server/index.js",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "start": "node server/index.js",
+    "demo": "node server/index.js --demo",
+    "test": "node --test \"test/*.test.js\"",
+    "build:demo-data": "node scripts/build-demo-data.mjs",
+    "build:samples": "node scripts/build-fomo-archive.mjs && node scripts/build-fomo-sample.mjs && node scripts/build-chameleon-sample.mjs && node scripts/build-canary-sample.mjs && node scripts/build-loxley-sample.mjs",
+    "build:canary": "node scripts/build-canary.mjs",
+    "test:canary": "node scripts/build-canary.mjs --test"
+  },
+  "license": "MIT"
+}
