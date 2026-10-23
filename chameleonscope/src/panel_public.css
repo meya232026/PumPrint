@@ -1,0 +1,92 @@
+/* v1.52: the public pages (About, Roadmap) and the gate. The same skin as the rest: the jungle surface, the teal accent, the display
+   face for the titles. Built to read well as a landing page on a phone and on a wide screen. */
+.pub { display: grid; gap: 28px; padding: 18px 0 30px; }
+.pub-hero { display: grid; gap: 14px; padding: 34px 0 10px; max-width: 900px; }
+.pub-hero.small { padding-top: 26px; }
+.pub-hero.small h1 { font-size: clamp(30px, 4.4vw, 52px); }
+.pub-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2); }
+.pub-eyebrow i { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 22%, transparent); }
+.pub h1 { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: clamp(34px, 5.2vw, 60px); line-height: 1.02; letter-spacing: -0.02em; }
+.pub h1 span { background: linear-gradient(90deg, var(--accent-2), var(--accent) 55%, var(--accent-3)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.pub-lead { margin: 4px 0 0; font-size: 17px; line-height: 1.5; color: var(--ink-2); max-width: 760px; }
+.pub-lead a, .pub-access a { color: var(--accent); text-decoration: none; border-bottom: 1px dashed color-mix(in srgb, var(--accent) 50%, transparent); }
+.pub-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px; }
+.pub-actions .btn { text-decoration: none; padding: 9px 16px; font-weight: 600; }
+.pub-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 1000px) { .pub-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .pub-grid { grid-template-columns: minmax(0, 1fr); } }
+.pub-card { border: 1px solid var(--line); border-radius: 16px; background: var(--surface); padding: 18px 18px 16px; display: grid; gap: 8px; align-content: start; min-width: 0; }
+.pub-card:hover { border-color: var(--line-2); }
+.pub-ico { width: 38px; height: 38px; border-radius: 11px; display: grid; place-items: center; font-size: 19px; background: var(--surface-2); border: 1px solid var(--line); }
+.pub-card h3 { margin: 4px 0 0; font-family: var(--font-display); font-size: 18px; font-weight: 700; }
+.pub-card p { margin: 0; color: var(--ink-2); font-size: 14px; line-height: 1.5; }
+.pub-access { border: 1px solid var(--line-2); border-radius: 16px; padding: 20px 22px; background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 9%, var(--surface)), var(--surface) 60%); display: grid; gap: 8px; }
+.pub-access h2 { margin: 0; font-family: var(--font-display); font-size: 22px; }
+.pub-access p { margin: 0; color: var(--ink-2); font-size: 15px; line-height: 1.55; max-width: 860px; }
+/* the roadmap: a spine with numbered nodes */
+.rm { list-style: none; margin: 0; padding: 0 0 0 4px; display: grid; gap: 0; position: relative; max-width: 960px; }
+.rm::before { content: ''; position: absolute; left: 25px; top: 24px; bottom: 24px; width: 2px; background: linear-gradient(180deg, var(--accent), var(--accent-3) 60%, var(--line-2)); opacity: .55; }
+.rm-step { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 16px; padding: 0 0 26px; position: relative; }
+.rm-node { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: var(--surface); border: 2px solid var(--line-2); font-family: var(--font-display); font-weight: 700; font-size: 15px; color: var(--ink-2); z-index: 1; }
+.rm-node span { transform: translateY(1px); }
+.rm-step.now .rm-node { border-color: var(--accent); color: var(--accent-ink); background: var(--accent); font-size: 12px; letter-spacing: .04em; box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 18%, transparent); }
+.rm-body { border: 1px solid var(--line); border-radius: 16px; background: var(--surface); padding: 16px 18px 16px; display: grid; gap: 8px; min-width: 0; }
+.rm-step.now .rm-body { border-color: color-mix(in srgb, var(--accent) 45%, var(--line-2)); }
+.rm-tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+.rm-step.now .rm-tag { color: var(--accent); }
+.rm-body h3 { margin: 0; font-family: var(--font-display); font-size: 21px; font-weight: 700; letter-spacing: -0.01em; }
+.rm-body p { margin: 0; color: var(--ink-2); font-size: 14.5px; line-height: 1.55; }
+.rm-list { margin: 2px 0 0; padding-left: 18px; color: var(--ink-2); font-size: 14px; line-height: 1.6; }
+/* v1.54: the roadmap's tree. The steps stay on the left; on the right a tree grows from step 4 at the roots to Now in the crown,
+   and its apples carry the portraits of the collection (each apple opens the Mint NFT tab). Sticky beside the steps on a wide
+   screen, above them on a phone. */
+.rm-wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, 44%); gap: 26px; align-items: stretch; }
+/* v1.58: the tree of light stands to the right of the steps and runs their whole height: the rocks at step 4, the crown at Now.
+   Its own night colours in both themes (a picture), fading into the page at the edges */
+.rm-tree { position: relative; min-height: 560px; }
+.rm-tree svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; overflow: visible; }
+.rm-tree .rm-tree-note { position: absolute; left: 0; right: 0; bottom: -24px; font-family: var(--font-mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); text-align: center; }
+.rm-tree .apple { cursor: pointer; }
+.rm-tree .apple image { transition: transform .18s; transform-box: fill-box; transform-origin: center; }
+.rm-tree .apple:hover image { transform: scale(1.12); }
+.rm-tree .fruit-halo { fill: url(#rmFruitHalo); }
+.rm-tree .fruit-skin { fill: url(#rmFruit); stroke: #9fdcff; stroke-width: 1.2; }
+.rm-tree .fruit-ring { fill: none; stroke: #e6f6ff; stroke-width: 1.4; opacity: .9; }
+.rm-tree.plain .apple image { display: none; }
+.rm-tree .rm-light .core { fill: #9fdcff; }
+.rm-tree .rm-light .halo { fill: #3d8cff; opacity: .32; }
+.rm-tree .rm-light.white .core { fill: #ffffff; }
+.rm-tree .rm-light.white .halo { fill: #bfe6ff; opacity: .24; }
+.rm-tree .rm-light { animation: rmTwinkle 3.2s ease-in-out infinite; }
+@keyframes rmTwinkle { 0%, 100% { opacity: .3; } 50% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .rm-tree .rm-light { animation: none; opacity: .85; } }
+@media (max-width: 1000px) { .rm-wrap { grid-template-columns: minmax(0, 1fr); } .rm-tree { order: -1; height: 64vh; min-height: 440px; max-height: 760px; margin-bottom: 30px; } }
+/* the gate */
+.gate { display: grid; gap: 18px; max-width: 900px; padding: 30px 0 10px; }
+.gate-actions { display: grid; gap: 10px; border: 1px solid var(--line-2); border-radius: 16px; padding: 18px 20px; background: var(--surface); }
+.gate-actions .gate-who { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-size: 14px; }
+.gate-actions .gate-who b { font-family: var(--font-mono); }
+.gate-actions .gate-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.gate-actions .gate-note { color: var(--ink-2); font-size: 13.5px; line-height: 1.5; margin: 0; }
+.gate-actions .gate-note.bad { color: var(--warning); }
+.gate-actions .btn.big { padding: 11px 18px; font-size: 15px; font-weight: 600; }
+.gate-rules { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px; }
+.gate-rule { border: 1px solid var(--line); border-radius: 14px; background: var(--surface); padding: 16px; display: grid; gap: 6px; align-content: start; min-width: 0; }
+.gate-rule.on { border-color: color-mix(in srgb, var(--accent) 45%, var(--line-2)); }
+.gate-rule h4 { margin: 0; font-family: var(--font-display); font-size: 16px; }
+.gate-rule p { margin: 0; color: var(--ink-2); font-size: 13.5px; line-height: 1.5; }
+.gate-rule .num { font-size: 20px; font-weight: 600; color: var(--ink); }
+.gate-addr { display: flex; align-items: center; gap: 6px; min-width: 0; }
+.gate-addr code { font-family: var(--font-mono); font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; color: var(--ink); }
+.gate-addr .btn.small { flex: none; }
+/* v1.69: the token contract and the buy links in the rules (a long address wraps instead of overflowing the card) */
+.gate-rule .gate-contract code { font-family: var(--font-mono); font-size: 11.5px; color: var(--ink); word-break: break-all; }
+.gate-rule a, .gate-actions .gate-note a { color: var(--accent); }
+/* the header while the gate is up: only the public tabs, no network switch, no bell; the public tabs hide once inside */
+.tabs button.pub { display: none; }
+body.gated .tabs button:not(.pub):not(.pub-too) { display: none; }
+body.gated .tabs button.pub { display: inline-block; }
+body.gated #netSwitch, body.gated #bellBtn, body.gated .status { display: none !important; }
+body.gated .foot-data { display: none; }
+.foot-pub a { color: var(--ink-2); text-decoration: none; } .foot-pub a:hover { color: var(--ink); text-decoration: underline; }
+@media (max-width: 640px) { .pub-hero { padding-top: 22px; } .pub-lead { font-size: 15.5px; } .rm-step { grid-template-columns: 36px minmax(0, 1fr); gap: 10px; } .rm-node { width: 36px; height: 36px; font-size: 13px; } .rm::before { left: 21px; } .rm-body { padding: 14px; } .gate-actions { padding: 14px; } }

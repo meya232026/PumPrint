@@ -1,0 +1,246 @@
+/* =======================================================================================================
+   v2.20 - the portal, quantum. |CHAMELEON⟩ opens on a dark place where the terminal waits in superposition: two ghost states of it,
+   Solana's and Robinhood Chain's, blurred over each other and flickering in and out of phase. Interference fringes run between the
+   two eyes, and the eyes are qubits: Bloch spheres inside a chameleon's turret of scales (drawn by src/app_portal.js).
+   Connecting Phantom is the observation: the ghosts slide into one, a cyan-white flash of measurement breaks out between the eyes and
+   the terminal is there. The portal is always dark, whatever the site's theme. Every motion here is decoration and stops for
+   reduced-motion. (v2.10's portal had a ghost button called .pt-ghost: it is .pt-ghost-btn now, .pt-ghost is the ghost terminal.)
+   ======================================================================================================= */
+.portal {
+  --p-sol: #9945ff; --p-sol-2: #14f195; --p-hood: #ccff00; --p-q: #6ef6ff;
+  position: fixed; inset: 0; z-index: 300; display: flex; align-items: center; justify-content: center; overflow: hidden auto;
+  background: radial-gradient(120vmax 90vmax at 50% 38%, #0d0b2b 0%, #06061a 38%, #020309 72%, #010103 100%);
+  color: #ecf4ff; isolation: isolate; color-scheme: dark; overscroll-behavior: contain;
+}
+.portal[hidden] { display: none !important; }
+body.portal-open { overflow: hidden; }
+/* v2.24: while the portal covers the page, the terminal under it is neither painted nor animated (it ran its own animations unseen) */
+body.portal-cover .shell, body.portal-cover .drawer, body.portal-cover .scrim, body.portal-cover .logo-zoom { visibility: hidden; }
+body.portal-cover::before, body.portal-cover::after { display: none; }
+body.portal-cover .shell, body.portal-cover .shell * { animation-play-state: paused !important; }
+.pt-sky { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+
+/* ---------- the terminal in superposition: two ghost states of it, one per chain, out of phase ---------- */
+.pt-ghost { position: fixed; z-index: 1; left: 50%; top: 50%; width: min(1180px, 96vw); height: min(780px, 94vh); transform: translate(-50%, -50%); pointer-events: none;
+  -webkit-mask-image: radial-gradient(closest-side, rgba(0, 0, 0, .45) 0%, rgba(0, 0, 0, .95) 58%, transparent 100%);
+  mask-image: radial-gradient(closest-side, rgba(0, 0, 0, .45) 0%, rgba(0, 0, 0, .95) 58%, transparent 100%); }
+.gt { --a: 153, 69, 255; --b: 20, 241, 149; position: absolute; inset: 0; display: flex; flex-direction: column; gap: 12px; padding: 18px 20px; overflow: hidden; border-radius: 26px;
+  border: 1px solid rgba(var(--a), .26); background: linear-gradient(180deg, rgba(var(--a), .08), rgba(var(--a), .02));
+  transition: transform 1s cubic-bezier(.7, 0, .2, 1), opacity .6s ease; will-change: transform, opacity; } /* v2.24: no blur, no screen blending: the two ghosts were the largest layers and were redrawn with both every frame */
+.gt.sol { transform: translate3d(-2.2%, -1.7%, 0) rotate(-1.4deg) scale(.975); animation: gtPhase 7s ease-in-out infinite alternate; }
+.gt.hood { --a: 204, 255, 0; --b: 110, 246, 255; transform: translate3d(2.2%, 1.7%, 0) rotate(1.2deg) scale(1.02); animation: gtPhase 7s ease-in-out -3.5s infinite alternate; }
+@keyframes gtPhase { 0% { opacity: .16; } 38% { opacity: .5; } 44% { opacity: .28; } 50% { opacity: .56; } 100% { opacity: .2; } }
+.gt i { display: block; border-radius: 6px; background: rgba(var(--a), .5); }
+.gt i.lg { background: radial-gradient(circle at 35% 30%, rgba(var(--b), .95), rgba(var(--b), .28) 72%); }
+.gt i.sp { flex: 1; background: none; border: 0; }
+.gt-top { display: flex; align-items: center; gap: 12px; height: 46px; padding: 0 14px; border-radius: 16px; border: 1px solid rgba(var(--a), .36); background: rgba(var(--a), .05); flex: none; }
+.gt-top .lg { width: 28px; height: 28px; border-radius: 50%; }
+.gt-top .tab { width: 74px; height: 12px; }
+.gt-top i:nth-child(2) { background: rgba(var(--b), .85); }
+.gt-top .pill { width: 58px; height: 22px; border-radius: 999px; background: none; border: 1px solid rgba(var(--b), .55); }
+.gt-day { display: flex; align-items: center; gap: 14px; padding: 12px 14px; border-radius: 16px; border: 1px solid rgba(var(--a), .28); flex: none; }
+.gt-day > .t1 { width: 92px; height: 14px; flex: none; }
+.gt-cards { flex: 1; display: flex; gap: 10px; min-width: 0; }
+.gt-card { flex: 1; min-width: 0; display: flex; align-items: center; gap: 9px; height: 54px; padding: 0 12px; border-radius: 13px; border: 1px solid rgba(var(--b), .36); background: rgba(var(--b), .04); }
+.gt-card .lg { width: 32px; height: 32px; border-radius: 10px; flex: none; }
+.gt-card .t1 { width: 46%; height: 10px; }
+.gt-card .x { width: 38px; height: 15px; margin-left: auto; background: rgba(var(--b), .85); }
+.gt-ctl { display: flex; align-items: center; gap: 9px; flex: none; }
+.gt-ctl i { width: 66px; height: 24px; border-radius: 999px; background: none; border: 1px solid rgba(var(--a), .45); }
+.gt-ctl i:first-child { background: rgba(var(--a), .45); }
+.gt-row { display: grid; grid-template-columns: 40px 1.3fr 1fr 1.5fr .7fr .7fr .7fr 76px; align-items: center; gap: 16px; height: 58px; padding: 0 16px; border-radius: 16px; border: 1px solid rgba(var(--a), .22); background: rgba(var(--a), .035); flex: none; }
+.gt-row .lg { width: 40px; height: 40px; border-radius: 12px; }
+.gt-row .t1 { height: 12px; width: 78%; background: rgba(236, 240, 255, .55); }
+.gt-row .t2 { height: 9px; width: 56%; opacity: .7; }
+.gt-row .bar { --f: 60%; height: 6px; width: 100%; border-radius: 999px; background: linear-gradient(90deg, rgba(var(--b), .9) var(--f), rgba(var(--a), .2) 0); }
+.gt-row .n { height: 11px; width: 72%; }
+.gt-row .v { height: 22px; width: 100%; border-radius: 999px; background: none; border: 1px solid rgba(var(--b), .6); }
+.gt-row:nth-child(3n) .t1 { width: 60%; }
+.gt-row:nth-child(3n+1) .bar { --f: 84%; }
+.gt-row:nth-child(3n+2) .bar { --f: 34%; }
+.gt-row:nth-child(2n) .t2 { width: 38%; }
+.gt-row:nth-child(4n+1) .v { background: rgba(var(--b), .25); }
+.gt-scan { position: absolute; left: 0; right: 0; top: 0; height: 22%; pointer-events: none; animation: gtScan 6.5s cubic-bezier(.45, 0, .55, 1) infinite;
+  background: linear-gradient(180deg, rgba(110, 246, 255, 0), rgba(110, 246, 255, .06) 62%, rgba(220, 255, 255, .15) 97%, rgba(110, 246, 255, 0)); }
+@keyframes gtScan { from { transform: translateY(-110%); } to { transform: translateY(560%); } }
+
+/* ---------- interference: two sources, one behind each eye; where their rings cross, the fringes ---------- */
+.pt-fringes { position: fixed; inset: -12%; z-index: 1; pointer-events: none; opacity: .55;
+  background:
+    repeating-radial-gradient(circle at 41% 44%, rgba(110, 246, 255, .11) 0 1.2px, transparent 1.6px 17px),
+    repeating-radial-gradient(circle at 59% 44%, rgba(153, 69, 255, .14) 0 1.2px, transparent 1.6px 17px);
+  -webkit-mask-image: radial-gradient(52vmax 34vmax at 50% 44%, #000 0%, rgba(0, 0, 0, .45) 48%, transparent 78%);
+  mask-image: radial-gradient(52vmax 34vmax at 50% 44%, #000 0%, rgba(0, 0, 0, .45) 48%, transparent 78%); }
+/* v2.24: the fringes hold still (until 2.23 a 16-second scale and turn of a masked layer larger than the screen, barely visible) */
+
+.pt-fog { position: fixed; z-index: 1; pointer-events: none; border-radius: 50%; opacity: .6; will-change: transform; } /* v2.24: soft by its gradient, no 70px blur */
+.pt-fog.f1 { width: 74vmax; height: 50vmax; left: -22vmax; top: 26%; background: radial-gradient(closest-side, rgba(153, 69, 255, .52), rgba(153, 69, 255, .34) 34%, rgba(153, 69, 255, .12) 66%, rgba(153, 69, 255, 0)); animation: ptDrift1 27s ease-in-out infinite alternate; }
+.pt-fog.f2 { width: 62vmax; height: 42vmax; right: -20vmax; top: 4%; background: radial-gradient(closest-side, rgba(110, 246, 255, .23), rgba(110, 246, 255, .15) 34%, rgba(110, 246, 255, .05) 66%, rgba(110, 246, 255, 0)); animation: ptDrift2 33s ease-in-out infinite alternate; }
+.pt-fog.f3 { width: 84vmax; height: 36vmax; left: 8%; bottom: -20vmax; background: radial-gradient(closest-side, rgba(204, 255, 0, .13), rgba(204, 255, 0, .085) 34%, rgba(204, 255, 0, .03) 66%, rgba(204, 255, 0, 0)); animation: ptDrift3 39s ease-in-out infinite alternate; }
+@keyframes ptDrift1 { to { transform: translate3d(12vmax, -6vmax, 0) scale(1.12); } }
+@keyframes ptDrift2 { to { transform: translate3d(-10vmax, 8vmax, 0) scale(.92); } }
+@keyframes ptDrift3 { to { transform: translate3d(-8vmax, -4vmax, 0) scale(1.08); } }
+.pt-vignette { position: fixed; inset: 0; z-index: 2; pointer-events: none; background: radial-gradient(85vmax 62vmax at 50% 42%, rgba(0, 0, 0, 0) 36%, rgba(0, 0, 0, .72) 100%); }
+
+/* ---------- the stage: the ring of the state, the two eyes, the name ---------- */
+.pt-stage { position: relative; z-index: 3; display: flex; flex-direction: column; align-items: center; text-align: center; width: 100%; max-width: 820px; padding: 22px 16px 84px; margin: auto; }
+.pt-gaze { position: relative; width: min(720px, 100%); height: clamp(180px, 22vw, 280px); display: flex; align-items: center; justify-content: center; }
+.pt-ring { position: absolute; left: 50%; top: 50%; width: min(630px, 108vw); height: auto; aspect-ratio: 720 / 380; transform: translate(-50%, -50%); pointer-events: none; opacity: .6; overflow: visible; }
+.pt-ring text { font-family: "IBM Plex Mono", var(--font-mono), monospace; font-size: 12.5px; letter-spacing: .26em; fill: rgba(200, 238, 255, .62); }
+.pt-ring-line { fill: none; stroke: rgba(170, 150, 255, .18); stroke-width: 1; }
+.pt-ring-line.thin { stroke: rgba(110, 246, 255, .2); stroke-dasharray: 2 8; }
+
+.pt-eyes { --gap: clamp(26px, 7vw, 84px); position: relative; display: flex; align-items: center; justify-content: center; gap: var(--gap); }
+/* the two eyes are entangled: a thread of light runs between them */
+.pt-eyes::before { content: ''; position: absolute; left: calc(50% - var(--gap) / 2 - 4px); right: calc(50% - var(--gap) / 2 - 4px); top: 50%; height: 1px; transform: translateY(-50%); pointer-events: none; opacity: .6;
+  background: linear-gradient(90deg, rgba(153, 69, 255, 0), rgba(153, 69, 255, .8) 18%, rgba(110, 246, 255, .9) 50%, rgba(204, 255, 0, .8) 82%, rgba(204, 255, 0, 0));
+  -webkit-mask: repeating-linear-gradient(90deg, #000 0 5px, transparent 5px 9px); mask: repeating-linear-gradient(90deg, #000 0 5px, transparent 5px 9px); animation: ptLink 2.8s linear infinite; }
+@keyframes ptLink { to { -webkit-mask-position: 18px 0; mask-position: 18px 0; } }
+.pt-eye { position: relative; margin: 0; width: clamp(108px, 17vw, 168px); aspect-ratio: 1; isolation: isolate; }
+.pt-eye svg { display: block; width: 100%; height: 100%; overflow: visible; }
+/* v2.24: the glow round the eye is a gradient behind it (until 2.23 two drop-shadows, recomputed every frame the pupil moved) */
+.pt-eye::before { content: ''; position: absolute; inset: -24%; z-index: -1; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(closest-side, var(--eye-glow) 0%, color-mix(in srgb, var(--eye-glow) 45%, transparent) 46%, transparent 74%); }
+.pt-eye.sol { --eye-glow: rgba(153, 69, 255, .55); }
+.pt-eye.hood { --eye-glow: rgba(204, 255, 0, .38); }
+.pt-eye .qy-ring, .pt-eye .qy-tip { will-change: transform; }
+.pt-eye .qy-ket { font-family: "IBM Plex Mono", var(--font-mono), monospace; font-size: 10.5px; font-weight: 500; text-anchor: middle; letter-spacing: .02em; paint-order: stroke; stroke: #020104; stroke-width: 3.2px; stroke-linejoin: round; }
+.pt-eye .qy-glow { animation: qyGlow 3.4s ease-in-out infinite alternate; }
+@keyframes qyGlow { from { opacity: .5; } to { opacity: 1; } }
+.pt-eye-cap { position: absolute; left: 50%; top: calc(100% + 14px); transform: translateX(-50%); font-family: "IBM Plex Mono", var(--font-mono), monospace; font-size: 10.5px; letter-spacing: .3em; text-transform: uppercase; color: rgba(215, 230, 255, .5); white-space: nowrap; transition: color .4s; }
+.pt-eye.sol .pt-eye-cap { color: rgba(176, 140, 255, .75); }
+.pt-eye.hood .pt-eye-cap { color: rgba(214, 255, 90, .64); }
+
+/* the name as a state: |CHAMELEON⟩. The brackets are drawn (a bar and a chevron), not typed: the text stays the plain name */
+.pt-title { position: relative; isolation: isolate; margin: 34px 0 6px; font-family: "Unbounded", var(--font-display); font-weight: 700; line-height: 1; font-size: clamp(30px, 7vw, 74px); letter-spacing: .12em; text-transform: uppercase; }
+.pt-title span { display: inline-block; white-space: nowrap; background: linear-gradient(92deg, #c6a8ff 0%, #9945ff 16%, #6ef6ff 46%, #14f195 66%, #ccff00 88%, #f2ffc2 100%); background-size: 145% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent; background-position: 30% 50%; }
+/* v2.24: the name's glow is a soft light behind it (until 2.23 a drop-shadow over the word and a colour drift, both redrawn every frame) */
+.pt-title::before { content: ''; position: absolute; left: 4%; right: 4%; top: -45%; bottom: -45%; z-index: -1; pointer-events: none;
+  background: radial-gradient(closest-side, rgba(110, 246, 255, .15), rgba(110, 246, 255, .06) 55%, transparent 80%); }
+.pt-title span::before, .pt-title span::after { content: ''; display: inline-block; height: 1.12em; vertical-align: -.13em; background: linear-gradient(180deg, #f2feff 0%, #6ef6ff 42%, #9945ff 100%); }
+.pt-title span::before { width: .085em; margin-right: .26em; border-radius: .05em; }
+.pt-title span::after { width: .42em; -webkit-mask: var(--ket) center / 100% 100% no-repeat; mask: var(--ket) center / 100% 100% no-repeat; }
+@keyframes ptIris { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
+.pt-sub { margin: 6px 0 16px; max-width: 660px; font-size: clamp(14px, 1.7vw, 16.5px); line-height: 1.55; color: rgba(222, 232, 252, .78); }
+.pt-actions { display: flex; flex-direction: column; align-items: center; gap: 12px; min-height: 58px; }
+.pt-row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+.pt-cta { position: relative; display: inline-flex; align-items: center; gap: 12px; padding: 17px 34px; border: 0; border-radius: 999px; cursor: pointer; text-decoration: none;
+  font-family: "Unbounded", var(--font-display); font-weight: 600; font-size: 15px; letter-spacing: .07em; color: #04060f;
+  background: linear-gradient(92deg, #b18bff 0%, #9945ff 16%, #6ef6ff 52%, #14f195 76%, #ccff00 100%); background-size: 160% 100%;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, .24) inset, 0 14px 44px rgba(153, 69, 255, .36), 0 0 70px rgba(110, 246, 255, .24);
+  transition: transform .25s cubic-bezier(.2, .8, .2, 1), box-shadow .25s, background-position .6s; }
+.pt-cta::after { content: ''; position: absolute; inset: -5px; border-radius: inherit; border: 1px solid rgba(110, 246, 255, .4); opacity: 0; transform: scale(.94); transition: opacity .3s, transform .45s cubic-bezier(.2, .8, .2, 1); pointer-events: none; }
+.pt-cta:hover, .pt-cta:focus-visible { transform: translateY(-2px) scale(1.03); background-position: 100% 50%; box-shadow: 0 0 0 1px rgba(255, 255, 255, .34) inset, 0 18px 54px rgba(153, 69, 255, .48), 0 0 90px rgba(110, 246, 255, .34); }
+.pt-cta:hover::after, .pt-cta:focus-visible::after { opacity: 1; transform: scale(1); }
+.pt-cta:disabled { cursor: progress; filter: saturate(.6) brightness(.85); transform: none; }
+.pt-cta .ph { width: 22px; height: 22px; flex: none; }
+.pt-ghost-btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 24px; border-radius: 999px; border: 1px solid rgba(160, 220, 255, .3); background: rgba(10, 12, 34, .55); color: #e6f2ff; font-weight: 600; font-size: 14px; text-decoration: none; cursor: pointer; transition: border-color .2s, background .2s; }
+.pt-ghost-btn:hover { border-color: rgba(110, 246, 255, .6); background: rgba(20, 26, 60, .72); }
+.pt-msg { font-size: 13px; color: rgba(222, 232, 255, .72); margin: 0; }
+.pt-msg.bad { color: #ff9a9a; }
+.pt-msg b { color: #fff; }
+.pt-note { margin: 18px 0 0; font-size: 12px; color: rgba(205, 220, 245, .5); max-width: 460px; }
+.pt-foot { position: fixed; left: 0; right: 0; bottom: 0; z-index: 4; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 26px; padding: 14px 16px calc(14px + env(safe-area-inset-bottom)); background: linear-gradient(to top, rgba(2, 2, 6, .86), rgba(2, 2, 6, 0)); }
+.pt-foot a { color: rgba(214, 228, 252, .58); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; font-family: "IBM Plex Mono", var(--font-mono), monospace; transition: color .2s; }
+.pt-foot a:hover { color: #fff; }
+.pt-welcome { font-family: "IBM Plex Mono", var(--font-mono), monospace; font-size: 12.5px; letter-spacing: .14em; text-transform: uppercase; color: rgba(140, 246, 255, .82); margin: 0 0 4px; }
+
+/* ---------- v2.21: the narrative first. A badge over the eyes, and under the name the live Quantum radar in superposition: the hottest
+   quantum coins on Solana right now, their pictures doubled and blurred, their tickers flickering, their numbers hidden until the visitor
+   observes (connects Phantom) ---------- */
+.pt-badge { position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 10px; margin: 0 0 14px; padding: 7px 16px 7px 12px; border-radius: 999px;
+  font-family: "IBM Plex Mono", var(--font-mono), monospace; font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; color: #dff9ff;
+  background: linear-gradient(90deg, rgba(153, 69, 255, .24), rgba(110, 246, 255, .16)); border: 1px solid rgba(110, 246, 255, .48);
+  box-shadow: 0 0 26px -6px rgba(110, 246, 255, .6), inset 0 0 14px rgba(110, 246, 255, .08); }
+.pt-badge b { font-weight: 600; color: #fff; }
+.pt-badge .q-ico { display: inline-block; font-size: 16px; line-height: 1; color: #6ef6ff; animation: qSpin 7s linear infinite; }
+.pt-badge-sep { width: 1px; height: 12px; background: rgba(110, 246, 255, .45); }
+.pr-dot { position: relative; display: inline-block; width: 7px; height: 7px; margin-right: 7px; border-radius: 50%; background: #2bf0a0; vertical-align: 1px; } /* v2.24: its ping is in quantum.css */
+.pt-radar { position: relative; width: min(760px, 100%); margin: 0 0 22px; padding: 13px 16px 12px; border-radius: 20px; overflow: hidden; text-align: left;
+  background: linear-gradient(180deg, rgba(14, 16, 46, .9), rgba(8, 8, 26, .84)); border: 1px solid rgba(110, 246, 255, .3);
+  box-shadow: inset 0 0 0 1px rgba(153, 69, 255, .1), 0 18px 50px -26px rgba(110, 246, 255, .55); } /* v2.24: denser glass instead of a backdrop blur over the moving dark */
+.pt-radar[hidden] { display: none; }
+.pt-radar::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(100deg, transparent 0%, rgba(110, 246, 255, .1) 46%, transparent 56%); transform: translateX(-100%); animation: prSweep 4.6s ease-in-out infinite; }
+@keyframes prSweep { 0% { transform: translateX(-100%); } 62%, 100% { transform: translateX(100%); } }
+.pr-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; font-family: "IBM Plex Mono", var(--font-mono), monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: rgba(214, 232, 255, .7); }
+.pr-live { display: inline-flex; align-items: center; color: #2bf0a0; font-weight: 500; }
+.pr-head b { font-family: "Unbounded", var(--font-display); font-weight: 700; font-size: 13px; letter-spacing: .1em; white-space: nowrap; background: linear-gradient(95deg, #6ef6ff, #b18bff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.pr-count { margin-left: auto; font-size: 12px; letter-spacing: .04em; text-transform: none; color: #eaf8ff; }
+.pr-track { display: flex; gap: 10px; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, #000 84%, transparent); mask-image: linear-gradient(90deg, #000 84%, transparent); }
+.pr-card { flex: 0 0 172px; display: grid; grid-template-columns: 44px minmax(0, 1fr); align-items: center; gap: 10px; padding: 9px 10px; border-radius: 14px;
+  background: rgba(110, 246, 255, .05); border: 1px solid rgba(110, 246, 255, .2); animation: prIn .7s cubic-bezier(.2, .8, .2, 1) both; animation-delay: calc(var(--i, 0) * 80ms); }
+@keyframes prIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.pr-pic { position: relative; width: 44px; height: 44px; border-radius: 12px; overflow: hidden; background: radial-gradient(circle at 35% 30%, rgba(110, 246, 255, .4), rgba(153, 69, 255, .28) 60%, rgba(10, 10, 30, .85)); }
+.pr-pic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: blur(2.4px) saturate(1.35); transform: scale(1.08); transition: filter .5s ease, transform .5s ease, opacity .4s ease; }
+.pr-pic .pr-ghost { opacity: .42; filter: blur(3px) hue-rotate(160deg) saturate(1.6); transform: translate(5px, -4px) scale(1.12); animation: prGhost 2.8s ease-in-out infinite alternate; }
+@keyframes prGhost { 0% { transform: translate(5px, -4px) scale(1.12); opacity: .42; } 50% { opacity: .14; } 100% { transform: translate(-4px, 3px) scale(1.1); opacity: .38; } }
+.pr-b { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.pr-b b { font-family: "IBM Plex Sans", var(--font-ui), sans-serif; font-weight: 700; font-size: 14px; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  text-shadow: -2px 0 rgba(153, 69, 255, .85), 2px 0 rgba(110, 246, 255, .85); filter: blur(.5px); animation: prFlick 3.4s steps(1) infinite; animation-delay: calc(var(--i, 0) * -.57s); transition: filter .4s, text-shadow .4s; }
+@keyframes prFlick { 0%, 46%, 49%, 52%, 100% { opacity: 1; } 47% { opacity: .3; } 50% { opacity: .55; } }
+.pr-b small { font-family: "IBM Plex Mono", var(--font-mono), monospace; font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; color: #6ef6ff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pr-hid { font-family: "IBM Plex Mono", var(--font-mono), monospace; font-size: 10.5px; letter-spacing: .02em; white-space: nowrap; color: rgba(200, 220, 255, .5); }
+.pr-card.ph .pr-pic { animation: prShimmer 1.6s ease-in-out infinite; }
+.pr-card.ph b { color: rgba(220, 240, 255, .62); text-shadow: none; filter: none; }
+@keyframes prShimmer { 50% { opacity: .55; } }
+.pt-radar.empty .pr-track { display: none; }
+.pr-note { margin: 10px 0 0; font-size: 11.5px; color: rgba(205, 222, 250, .64); }
+/* the observation: the cards collapse into sharp pictures as the portal goes */
+.portal.entering .pr-pic img { filter: none; transform: none; }
+.portal.entering .pr-pic .pr-ghost { opacity: 0; animation: none; }
+.portal.entering .pr-b b { filter: none; text-shadow: none; animation: none; }
+
+/* ---------- the measurement: the ghosts fall into one, a flash breaks out between the eyes, the terminal is there ---------- */
+.pt-burst { --bx: 50%; --by: 40%; position: fixed; z-index: 6; inset: 0; pointer-events: none; opacity: 0;
+  background: radial-gradient(circle at var(--bx) var(--by), #ffffff 0, #eafeff 2.5vmax, #6ef6ff 8vmax, #14f195 16vmax, #9945ff 32vmax, #22104e 56vmax, #07051a 86vmax);
+  clip-path: circle(0 at var(--bx) var(--by)); }
+.portal.entering .pt-burst { animation: ptBurst 1.2s cubic-bezier(.7, 0, .2, 1) forwards; }
+.portal.entering .pt-stage { animation: ptDive 1.05s cubic-bezier(.6, 0, .3, 1) forwards; }
+.portal.entering .pt-foot { opacity: 0; transition: opacity .3s; }
+.portal.entering .gt { transform: none; opacity: .8; animation: none; transition: transform .9s cubic-bezier(.8, 0, .2, 1), opacity .35s ease; }
+.portal.entering .gt.hood { opacity: .45; }
+.portal.entering .pt-fringes { animation: ptFringeHit 1s ease-out forwards; }
+.portal.entering .pt-eye .qy-glow { animation: none; opacity: 1; }
+.portal.entering .pt-eyes::before { animation-duration: .5s; opacity: 1; }
+.portal.leaving { animation: ptFade .6s ease forwards; pointer-events: none; }
+@keyframes ptBurst { 0% { opacity: 1; clip-path: circle(0 at var(--bx) var(--by)); } 24% { opacity: 1; clip-path: circle(3vmax at var(--bx) var(--by)); } 100% { opacity: 1; clip-path: circle(160vmax at var(--bx) var(--by)); } }
+@keyframes ptDive { 40% { opacity: 1; } 100% { transform: scale(1.4); opacity: 0; } }
+@keyframes ptFringeHit { 0% { opacity: .55; } 30% { opacity: 1; transform: scale(1.08); } 100% { opacity: 0; transform: scale(1.45); } }
+@keyframes ptFade { to { opacity: 0; } }
+/* the terminal resolves out of the blur, its two states still a little apart for a moment */
+body.world-in .shell { animation: worldIn 1.1s cubic-bezier(.2, .7, .2, 1) both; }
+/* v2.24: scale and opacity only (until 2.23 a blur, a saturation and two coloured shadows over the whole terminal for a second) */
+@keyframes worldIn { 0% { opacity: 0; transform: scale(.965); } 60% { opacity: 1; } 100% { opacity: 1; transform: none; } }
+
+@media (max-width: 760px) {
+  .gt { padding: 12px; gap: 9px; }
+  .gt-top .tab:nth-child(n+4), .gt-top .pill:last-child, .gt-card:nth-child(n+3), .gt-ctl i:nth-child(n+3):not(.sp) { display: none; }
+  .gt-row { grid-template-columns: 34px 1fr 64px; gap: 12px; height: 52px; padding: 0 12px; }
+  .gt-row .lg { width: 34px; height: 34px; }
+  .gt-row .t2, .gt-row .bar, .gt-row .n { display: none; }
+}
+@media (max-width: 640px) {
+  .pt-stage { padding: 18px 16px 96px; }
+  .pt-badge { gap: 7px; padding: 6px 12px 6px 10px; font-size: 9.5px; letter-spacing: .1em; }
+  .pt-radar { padding: 12px 12px 11px; border-radius: 18px; }
+  .pr-count { margin-left: 0; flex-basis: 100%; font-size: 11.5px; }
+  .pr-card { flex-basis: 152px; gap: 8px; }
+  .pr-hid { font-size: 9.5px; }
+  .pt-title { margin-top: 40px; letter-spacing: .08em; }
+  .pt-eye-cap { font-size: 9px; letter-spacing: .22em; }
+  .pt-cta { padding: 16px 26px; font-size: 14px; }
+  .pt-foot { gap: 6px 18px; }
+  .pt-fringes { opacity: .4; }
+}
+@media (max-height: 640px) and (min-width: 641px) { .pt-gaze { height: 170px; } .pt-eye { width: 110px; } .pt-title { margin-top: 26px; font-size: 46px; } }
+@media (max-height: 820px) { .pr-note { display: none; } .pt-title { margin-top: 26px; } }
+@media (prefers-reduced-motion: reduce) {
+  .pt-fog, .pt-title span, .gt, .gt-scan, .pt-fringes, .pt-eyes::before, .pt-eye .qy-glow, .pt-badge .q-ico, .pr-dot, .pt-radar::before, .pr-pic .pr-ghost, .pr-b b, .pr-card, .pr-card.ph .pr-pic { animation: none !important; }
+  .gt.sol, .gt.hood { opacity: .32; }
+  .gt-scan { display: none; }
+  .portal.entering .pt-burst { animation-duration: .01s; }
+  .portal.entering .pt-stage { animation: ptFade .3s ease forwards; }
+  body.world-in .shell { animation: ptFadeIn .4s ease both; }
+}
+@keyframes ptFadeIn { from { opacity: 0; } to { opacity: 1; } }

@@ -1,0 +1,7 @@
+{
+  "name": "chameleonscope-vendored",
+  "private": true,
+  "type": "commonjs",
+  "license": "MIT",
+  "description": "shmidtqq65/chameleonscope (commit 29a1547), vendored unchanged: src/ is the terminal's engine and page, server/feed the original headless service (reference only)."
+}

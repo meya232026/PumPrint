@@ -1,0 +1,40 @@
+  <!-- v2.20: the portal, quantum. On its own domain the site opens here: the terminal in superposition (two states of it, Solana's and
+       Robinhood Chain's, blurred over each other in the dark) and the chameleon's two eyes as qubits: Bloch spheres whose state vectors
+       look around, precess and lock on the button. Connecting Phantom is the observation: the vectors snap to |0⟩, the two states fall
+       into one and the terminal is there. The eyes, the ghost terminal, the entangled particles and the ring are drawn by
+       src/app_portal.js; the buttons inside #gateActions by src/app_gate.js. -->
+  <div class="portal" id="portal" hidden>
+    <canvas class="pt-sky" id="ptSky" aria-hidden="true"></canvas>
+    <div class="pt-ghost" id="ptGhost" aria-hidden="true"></div>
+    <div class="pt-fringes" aria-hidden="true"></div>
+    <div class="pt-fog f1" aria-hidden="true"></div><div class="pt-fog f2" aria-hidden="true"></div><div class="pt-fog f3" aria-hidden="true"></div>
+    <div class="pt-vignette" aria-hidden="true"></div>
+    <main class="pt-stage" aria-labelledby="ptTitle">
+      <!-- v2.21: the narrative first: the badge at the top, the live radar under the name (filled by src/app_portal.js) -->
+      <div class="pt-badge"><span class="q-ico" aria-hidden="true">&#x269B;&#xFE0E;</span><b>The quantum narrative</b><span class="pt-badge-sep" aria-hidden="true"></span><span><i class="pr-dot" aria-hidden="true"></i>live radar on Solana</span></div>
+      <div class="pt-gaze" aria-hidden="true">
+        <svg class="pt-ring" viewBox="0 0 720 380" aria-hidden="true"><defs><path id="ptRingPath" d="M30,190 a330,165 0 1,1 660,0 a330,165 0 1,1 -660,0"/></defs>
+          <ellipse cx="360" cy="190" rx="348" ry="181" class="pt-ring-line"/><ellipse cx="360" cy="190" rx="312" ry="148" class="pt-ring-line thin"/>
+          <text class="pt-runes"><textPath href="#ptRingPath" startOffset="0%">|ψ⟩ = α|SOLANA⟩ + β|ROBINHOOD CHAIN⟩ ✦ QUANTUM · QUANT · QUBIT · Q-DAY ✦ EVERY COIN IS IN SUPERPOSITION UNTIL YOU OBSERVE IT ✦ OBSERVE TO COLLAPSE ✦ </textPath></text>
+          <text class="pt-runes"><textPath href="#ptRingPath" startOffset="-100%">|ψ⟩ = α|SOLANA⟩ + β|ROBINHOOD CHAIN⟩ ✦ QUANTUM · QUANT · QUBIT · Q-DAY ✦ EVERY COIN IS IN SUPERPOSITION UNTIL YOU OBSERVE IT ✦ OBSERVE TO COLLAPSE ✦ </textPath></text>
+        </svg>
+        <div class="pt-eyes">
+          <figure class="pt-eye sol" id="ptEyeSol"><span class="pt-eye-cap">Solana</span></figure>
+          <figure class="pt-eye hood" id="ptEyeHood"><span class="pt-eye-cap">Robinhood Chain</span></figure>
+        </div>
+      </div>
+      <h1 class="pt-title" id="ptTitle"><span>Chameleon</span></h1>
+      <p class="pt-sub" id="ptSub">Quantum is the hottest narrative in the trenches. The radar finds every quantum coin on Solana the moment it moves, each one in superposition until you observe it.</p>
+      <section class="pt-radar" id="ptRadar" aria-label="Quantum radar, live">
+        <div class="pr-head"><span class="pr-live"><i class="pr-dot" aria-hidden="true"></i>Live</span><b>Quantum radar</b><span class="pr-count" id="ptRadarCount">scanning Solana for quantum coins&#x2026;</span></div>
+        <div class="pr-track" id="ptRadarTrack"><span class="pr-card ph"><span class="pr-pic"></span><span class="pr-b"><b>|?&#x27E9;</b><small>quantum</small><span class="pr-hid">$??.?K &#xB7; ??%</span></span></span><span class="pr-card ph"><span class="pr-pic"></span><span class="pr-b"><b>|?&#x27E9;</b><small>qubit</small><span class="pr-hid">$??.?K &#xB7; ??%</span></span></span><span class="pr-card ph"><span class="pr-pic"></span><span class="pr-b"><b>|?&#x27E9;</b><small>quant</small><span class="pr-hid">$??.?K &#xB7; ??%</span></span></span></div>
+        <p class="pr-note">In superposition until you observe them: connect Phantom and they collapse into numbers.</p>
+      </section>
+      <div class="pt-actions" id="gateActions"></div>
+      <p class="pt-note" id="gateNote">Phantom shares only your wallet's public address. No transaction, no fee, nothing to approve.</p>
+    </main>
+    <nav class="pt-foot" aria-label="Before you enter">
+      <a href="#/about">About</a><a href="#/roadmap">Roadmap</a><a href="#/valley">Valley</a><a data-link="x" href="https://x.com/ChameleonScopee" target="_blank" rel="noopener">@ChameleonScopee</a>
+    </nav>
+    <div class="pt-burst" aria-hidden="true"></div>
+  </div>

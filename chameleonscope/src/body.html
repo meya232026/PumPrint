@@ -1,0 +1,145 @@
+<!--PORTAL-->
+<div class="shell">
+  <header class="top">
+    <a class="brand" href="#/" title="|CHAMELEON⟩: back to the feed"><span class="brand-mark"><span class="q-orb back" aria-hidden="true"><i><b></b></i></span><span class="q-orb front" aria-hidden="true"><i><b></b></i></span><svg class="cham" viewBox="5 8 57 54" aria-hidden="true" focusable="false"><defs><linearGradient id="chamG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--accent-2)"/><stop offset=".48" stop-color="var(--accent)"/><stop offset="1" stop-color="var(--accent-3)"/></linearGradient></defs><path class="cham-tail" d="M39.5 29.8c-2.2-.7-4.6-1-7-.6-6.2.9-11.1 4.8-13.2 9.6-5.3 1.7-9.2 5.9-9.9 10.7-.8 5.4 2.6 9.8 7.5 10 4.5.2 7.8-3.3 7.4-7.6-.3-3.4-3-5.4-5.7-4.4-2.1.7-3.2 2.7-2.6 4.6.4 1.4 1.8 2.2 3 1.8 1-.3 1.4-1.3 1.1-2.1" fill="none" stroke="url(#chamG)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/><path class="cham-head" d="M59 29c-1.5-2.4-4-4.6-6.7-5.8-2.3-4.6-5.5-8.8-8.9-11.4-1-.8-2.4 0-2.3 1.2.4 4.2-.5 8-2.5 11.2-2 3.2-1.4 6.2 1.8 8.2 4 2.5 13 1.2 18.6-3.4z" fill="url(#chamG)"/><circle class="cham-eye" cx="50" cy="27.5" r="4"/><circle class="cham-pupil" cx="51.4" cy="27.5" r="1.7" fill="url(#chamG)"/></svg></span><span class="brand-name">Chameleon</span></a>
+    <nav class="tabs" id="siteTabs" aria-label="Sections">
+      <button data-tab="trenches" aria-pressed="true">Trenches</button>
+      <button data-tab="xray" aria-pressed="false">Smart Tracking</button>
+      <button data-tab="btc" aria-pressed="false" title="BTC Prediction Machine: Polymarket Bitcoin Up or Down, 15 and 5 minutes">BTC Machine</button>
+      <button data-tab="course" aria-pressed="false" title="The course: fifteen lessons on the 15 / 5 minute rounds">Course</button>
+      <button data-tab="bot" aria-pressed="false" title="Trading bot: how the calls are copied onto your own Polymarket account, and how to set it up">Trading bot</button>
+      <button data-tab="poly" aria-pressed="false" title="Smart traders on Polymarket: who to copy and who not">Poly Smart</button>
+      <button data-tab="valley" class="pub-too" aria-pressed="false" title="Chameleon Valley: the online farm of 100 chameleons. Connect Phantom and play">Valley</button>
+      <button data-tab="about" class="pub" aria-pressed="false" title="What Chameleon is">About</button>
+      <button data-tab="roadmap" class="pub" aria-pressed="false" title="Where Chameleon is going">Roadmap</button>
+    </nav>
+    <div class="top-right">
+      <div class="netswitch" id="netSwitch" role="group" aria-label="Network" title="Solana or Robinhood Chain; more networks are on the way">
+        <button data-net="solana" aria-pressed="true" title="Solana"><img class="net-mark sol" alt="" src="data:image/png;base64,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"><span class="net-name">Solana</span></button>
+        <button data-net="robinhood" aria-pressed="false" title="Robinhood Chain"><img class="net-mark hood" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAFfklEQVR42u2ZWYhdVRaGv73PPueeuhVvTQnBOCTaTYgGBElUaAWjpLHbCWyNwVkwMcYBAt2xA0Z9iLZji0NsbDQEow+CsUFt6W4lwYBoHHAAZ7TUlBaYlKnh1h3OsPfyYd9KHF761hyoBeflXg5n/Wv/6z//Wke9IwiHcGgO8ZgBMANgBsAhHmYyHyYORPz1sypqUHqaA3AOChqiXxy7ACmQCCg1DQFII7FZGr7p0Xz+nmbvt5pqWWFC6JzrOO4ky7EL3ahAmImuutEQAJtvK/DvLRHDgwpnGzRSnj4mhJv/WeOclRnDFnTw/z9DTZSVcA4iDXkCd6xuYcczIaVOwRif+E/5Xx5QzF9keey1CuoX/0+JCjmBuJH8LZcW2fVcyJwjBBN6zjsHNvdXlkJcFPb2aHr3aCLlm33KAIiAcdDXq7nxrFZ2/ivEGOj/XlHeryj3K5Lqz7muNCQ1GNinCPi1Sk1qDzgHrQG8viOgrUO4cE1Knvokbe77oadb8/XHmjA6mKyIwuZTrELiIA6gr6w446KcP16RYR0E2lPFRNAOfPylZu2prQcUCgETCq0lT7FmemDcANgc2gxsfTBi+8MFWlqFPPeKktbgsC7h7udqHHaUQxsIC5Al/mTyFEqdwuELHBnNSem4AMhzaDfwykuGxzfGFGKhWlag8JLp4PYna3TNdbz1ZsDc+YKz/t4ggMEhxVW3JcwpCUPW/zZpTWwdzDLwyaea+9a0EBeFMPZ0CSPIU8WGLXV+f5pl0zUt7Hw2pFgSxEJgYPAHxbIVGZfdlFJxzSU/ZgAiECkYHFRsurKF2rDCRL7qWsNgn+KKjQmX/Cnj4UcjXng6omOOr74OoDasOGqhY/0jdayAjMJKjB6AgHJeVe5eG9P9YUCxJF5pDAz9oDh9Rca6vyY8/7LhiVtjSrFgnee4daADYcMTNbo6hMSNzgvpschlMYAtdxXYtT2kfbZgM0+BegWOXOjYuLnOFz2ae6+LiSLx4tJQnvJ+xXX3JCxdYinnzVNnTABG5PKLbs2zD0WUurzijNBKRLH+HzXa24Q71sQM7NNELR601lAZgnNXpVy8KmWw0QuTOtA4gRD46qOAekV58yUN6uxXXPyXhOW/s2y+q8C7OwylDk8tpSBNYd5s4Yb76yQydhnRY31xjVhBHUC1rFh0kmXthoRX3wl45t4CbV1Cnh28J61DHHoHatXoeD8hXmjEgN14fx2AB9fFiMivJq0Fix35yJwwXWbiwEC5X/GHq1POPMXy+N8jPns7oFjigGRWBhUnLss5e2Xm9X6cPMDYADSGkqwOs+c51tya8H63ZvsDBWZ1CC4/eDqBEVbfmRAZ30PTYiuhAi9/lbJixZ9Tju4SHttYoNIYF0X827jcrzhnVcaSJbbpiWtiADT4Wx2CahWOWWy5dHXKf18NeP3FkLYuOeDz+/cq5s53XLUhodaQ0SnfCykNObD7P4YsV6xcn1IMYdumGIDKkGKgz8++x59suWVrja5OadppTogblcZ6pKdX89bLhsVLc867KOOprSG7dxoWHOv47QmWpctzTlyW85vFjgCoyvhXf1QARvY7b/8vYO8+zbpH6hgFfXs0t2+tcvJyy7wjHVFj31MHUjcxyY9qKyEOWjTcdHaR3m7Ntg+GCSIoKL+0qgOpePlUeuISH1UPjNBnz3ea93cZLrg+pb0A1kLdwUDuk1fK67yehM2raZo+Cna/ZCjEwlmXZ9QaNkIpP/tO6+200n7oeO15w+kX5hzRKSR2/JVlQgCIePp83av46A3D+demZOPkZyZVhdJEce3f6ixaag/QZyqjKRUS/BwQA8NMj2jqBBSQCSR2/NzkpFuJEYmcLjHzkW8GwAyAGQBTGz8Ckjk9LNK62tkAAAAASUVORK5CYII="><span class="net-name">Robinhood Chain</span></button>
+        <span class="net-soon" title="More networks are on the way">More chains soon</span>
+      </div>
+      <div class="social" aria-label="Chameleon on X"><a class="icon-btn social-x" data-link="x" href="https://x.com/ChameleonScopee" target="_blank" rel="noopener" title="Chameleon on X: @ChameleonScopee"><span class="x-glyph" aria-hidden="true">X</span><span class="sr">@ChameleonScopee on X</span></a></div>
+      <div class="acct" id="acct"><button class="btn small acct-btn" id="acctBtn" title="Sign in with Phantom: it shares only your public address, no transaction">Connect Phantom</button><div class="acct-menu" id="acctMenu" hidden></div></div>
+      <button class="icon-btn bell" id="bellBtn" aria-pressed="true" title="Call cards on this site: on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M4 11V7.5a4 4 0 0 1 8 0V11l1 1.5H3z"/><path d="M6.5 13.5a1.5 1.5 0 0 0 3 0"/><path class="bell-off" d="M2.5 2.5l11 11"/></svg><span class="sr">Call cards on or off</span></button>
+      <button class="icon-btn" id="themeBtn" title="Theme"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="5"/><path d="M8 3a5 5 0 0 1 0 10z" fill="currentColor" stroke="none"/></svg></button>
+    </div>
+  </header>
+
+  <section id="tabTrenches">
+  <!-- v2.21: the Quantum radar, the first block of the terminal (filled by renderQHero in src/app_ui.js) -->
+  <section class="qhero" id="qHero" aria-label="Quantum radar" hidden></section>
+  <div class="context" id="context"></div>
+  <div class="day-bar" id="dayBar" hidden></div>
+
+  <section class="controls" aria-label="Feed controls">
+    <button class="chip q-toggle" id="qBtn" aria-pressed="false" title="Only the coins on the quantum narrative, any stage"><span class="q-ico" aria-hidden="true">&#x269B;&#xFE0E;</span>Quantum</button>
+    <div class="chips" id="stageChips" role="group" aria-label="Life stage"></div>
+    <span class="spacer"></span>
+    <button class="chip watch-toggle" id="watchBtn" aria-pressed="false" title="Show only the tokens you starred"></button>
+    <div class="seg win" id="winSeg" role="group" aria-label="Time window" title="Time window for the change and volume columns"><button data-win="m5">5M</button><button data-win="h1" aria-pressed="true">1H</button><button data-win="h6">6H</button><button data-win="h24">24H</button></div>
+    <div class="seg win" id="topAge" role="group" aria-label="Token age" title="How old the tokens in Top may be (at least a day)" hidden><span class="seg-label">Age</span><button data-age="7">7D</button><button data-age="30">1M</button><button data-age="90">3M</button><button data-age="180">6M</button></div>
+    <select class="sel" id="sort" aria-label="Rank by">
+      <option value="feed">Default order</option><option value="best">Most promising</option><option value="new">Newest</option><option value="hot">Trending</option><option value="big">Market cap</option><option value="vol">Volume</option><option value="gain">Gainers</option><option value="holders">Holders</option><option value="liq">Liquidity</option><option value="safe">Safest</option>
+    </select>
+    <button class="btn" id="filtersBtn">Filters</button>
+    <div class="search-wrap" id="searchWrap"><input class="inp" id="search" type="search" placeholder="Search ticker, name or contract" aria-label="Search" autocomplete="off" spellcheck="false"><div class="search-drop" id="searchDrop" hidden role="listbox"></div></div>
+  </section>
+
+  <div class="layout">
+    <div>
+      <div class="feed-head"><span class="count" id="feedCount">0 tokens</span><span id="feedRule"></span><span class="hidden-note" id="hiddenNote"></span></div>
+      <div class="feed" id="feed" aria-label="Token feed"></div>
+      <div class="feed-note" id="bootNote">Connecting…</div>
+    </div>
+  </div>
+  </section>
+
+  <section class="xray" id="tabXray" hidden>
+    <div class="xray-search">
+      <input class="inp" id="xrayInput" type="search" placeholder="Paste a token contract or a wallet address (Solana or Robinhood Chain)" aria-label="Token contract or wallet address" autocomplete="off" spellcheck="false">
+      <button class="btn primary" id="xrayGo">Analyze</button>
+    </div>
+    <div class="xray-recent" id="xrayRecent"></div>
+    <div class="xray-out" id="xrayOut"></div>
+    <section class="board" id="smartBoard" aria-label="Wallets worth watching"></section>
+  </section>
+
+  <section class="tokpage" id="tabToken" aria-label="Token page" hidden></section>
+  <section class="embed" id="tabBtc" aria-label="BTC Prediction Machine" hidden></section>
+  <section class="embed" id="tabCourse" aria-label="Course" hidden></section>
+  <section class="embed" id="tabPoly" aria-label="Smart traders on Polymarket" hidden></section>
+  <!-- v2.00: Chameleon Valley, the online farm game (its page is the site's folder /valley/, its server valley.<domain>) -->
+  <section class="embed valley" id="tabValley" aria-label="Chameleon Valley" hidden></section>
+<!--PANELS-->
+
+  <footer class="foot">
+    <a class="brand foot-brand" href="#/" title="|CHAMELEON⟩: back to the feed"><span class="brand-mark"><span class="q-orb back" aria-hidden="true"><i><b></b></i></span><span class="q-orb front" aria-hidden="true"><i><b></b></i></span><svg class="cham" viewBox="5 8 57 54" aria-hidden="true" focusable="false"><defs><linearGradient id="chamG2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--accent-2)"/><stop offset=".48" stop-color="var(--accent)"/><stop offset="1" stop-color="var(--accent-3)"/></linearGradient></defs><path class="cham-tail" d="M39.5 29.8c-2.2-.7-4.6-1-7-.6-6.2.9-11.1 4.8-13.2 9.6-5.3 1.7-9.2 5.9-9.9 10.7-.8 5.4 2.6 9.8 7.5 10 4.5.2 7.8-3.3 7.4-7.6-.3-3.4-3-5.4-5.7-4.4-2.1.7-3.2 2.7-2.6 4.6.4 1.4 1.8 2.2 3 1.8 1-.3 1.4-1.3 1.1-2.1" fill="none" stroke="url(#chamG2)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/><path class="cham-head" d="M59 29c-1.5-2.4-4-4.6-6.7-5.8-2.3-4.6-5.5-8.8-8.9-11.4-1-.8-2.4 0-2.3 1.2.4 4.2-.5 8-2.5 11.2-2 3.2-1.4 6.2 1.8 8.2 4 2.5 13 1.2 18.6-3.4z" fill="url(#chamG2)"/><circle class="cham-eye" cx="50" cy="27.5" r="4"/><circle class="cham-pupil" cx="51.4" cy="27.5" r="1.7" fill="url(#chamG2)"/></svg></span><span class="brand-name">Chameleon</span></a>
+    <span>Analytics and guides. The site itself never trades or holds funds. Not financial advice.</span>
+    <span class="foot-data">Data: GMGN, pump.fun, Jupiter, Solana RPC, Robinhood Chain RPC, Blockscout. Charts by GMGN.</span>
+    <span class="foot-links"><a data-link="x" href="https://x.com/ChameleonScopee" target="_blank" rel="noopener">@ChameleonScopee on X</a></span>
+    <span class="foot-trade" id="footTrade"></span>
+    <span class="foot-pub"><a href="#/about">About</a> · <a href="#/roadmap">Roadmap</a></span>
+  </footer>
+</div>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Filters">
+  <h3>Filters <button class="icon-btn" id="drawerClose" title="Close">✕</button></h3>
+  <div class="f-group"><h5>Launchpad</h5><span class="muted" style="font-size:12px" id="lpNote">Solana: pump.fun launches only.</span></div>
+  <div class="f-group"><h5>Market cap, $</h5><div class="f-row"><input class="inp num" data-f="mcMin" type="number" min="0" placeholder="min" aria-label="Minimum market cap"><span class="muted">to</span><input class="inp num" data-f="mcMax" type="number" min="0" placeholder="max" aria-label="Maximum market cap"></div></div>
+  <div class="f-group"><h5>Age</h5><div class="f-row"><select class="sel" data-f="ageMin" aria-label="Minimum age"><option value="0">any</option><option value="60">1m+</option><option value="300">5m+</option><option value="900">15m+</option><option value="3600">1h+</option><option value="21600">6h+</option><option value="86400">24h+</option></select><span class="muted">to</span><select class="sel" data-f="ageMax" aria-label="Maximum age"><option value="0">any</option><option value="300">5m</option><option value="900">15m</option><option value="1800">30m</option><option value="3600">1h</option><option value="10800">3h</option><option value="21600">6h</option><option value="86400">24h</option><option value="259200">3d</option></select></div></div>
+  <div class="f-group"><h5>Activity</h5>
+    <div class="f-row"><label>Holders at least</label><input class="inp num" data-f="holdersMin" type="number" min="0" placeholder="0"></div>
+    <div class="f-row"><label>Volume 1h at least, $</label><input class="inp num" data-f="volMin" type="number" min="0" placeholder="0"></div>
+    <div class="f-row"><label>Buys 1h at least</label><input class="inp num" data-f="buysMin" type="number" min="0" placeholder="0"></div>
+    <div class="f-row"><label>Trades 1h at least</label><input class="inp num" data-f="txMin" type="number" min="0" placeholder="0"></div>
+    <div class="f-row"><label>Liquidity at least, $</label><input class="inp num" data-f="liqMin" type="number" min="0" placeholder="0"></div>
+  </div>
+  <div class="f-group"><h5>Curve progress, %</h5><div class="f-row"><input class="inp num" data-f="curveMin" type="number" min="0" max="100" placeholder="min"><span class="muted">to</span><input class="inp num" data-f="curveMax" type="number" min="0" max="100" placeholder="max"></div></div>
+  <div class="f-group"><h5>Concentration</h5>
+    <div class="f-row"><label>Dev holds at most, %</label><input class="inp num" data-f="devMax" type="number" min="0" max="100" placeholder="any"></div>
+    <div class="f-row"><label>Top 10 hold at most, %</label><input class="inp num" data-f="top10Max" type="number" min="0" max="100" placeholder="any"></div>
+  </div>
+  <div class="f-group"><h5>Keywords</h5>
+    <div class="f-row"><label>Include</label><input class="inp" data-f="kwIn" type="text" placeholder="cat, ai, trump"></div>
+    <div class="f-row"><label>Exclude</label><input class="inp" data-f="kwOut" type="text" placeholder="test, rug"></div>
+  </div>
+  <div class="f-group"><h5>Quality</h5>
+    <span class="muted" style="font-size:12px;display:block;margin-bottom:8px">Always hidden: AVOID and RUGGED verdicts, every rug sign, dead pools, launches nobody bought.</span>
+    <label class="toggle"><input type="checkbox" data-f="strict"><span>Strict quality<small>no CAUTION, socials, 10+ holders, no hard flags</small></span></label>
+    <label class="toggle"><input type="checkbox" data-f="socials"><span>Only with socials<small>X, Telegram or a website</small></span></label>
+    <label class="toggle"><input type="checkbox" data-f="originals"><span>Hide copies<small>same name as an earlier token</small></span></label>
+  </div>
+  <button class="btn" id="resetBtn">Reset filters</button>
+</aside>
+
+<div class="modal" id="srcModal" role="dialog" aria-label="Data sources"><div class="box">
+  <h3>Data sources <small class="build" id="buildTag" title="Which build of Chameleon this is"></small><button class="icon-btn" data-close title="Close">✕</button></h3>
+  <section class="gm-card" id="gmCard"></section>
+  <section class="gm-card rpc-card" id="rpcCard"><details class="gm-det"><summary><b>Your own nodes</b><span class="muted">optional, faster curves and trades</span></summary>
+    <p class="gm-sub">The public nodes rate-limit bursts: a Smart Tracking read or a busy launch hour can hit the wall. A free key from Helius, QuickNode or Triton (Solana) and any Robinhood Chain RPC of your own go first; the public ones stay as the fallback. Saved in this browser only; on a site, pass them in the address (<code>?rpc=</code>, <code>?hoodrpc=</code>) or build them in.</p>
+    <div class="gm-form"><input class="inp" id="rpcSol" type="url" autocomplete="off" spellcheck="false" placeholder="https://mainnet.helius-rpc.com/?api-key=..."><button class="btn" id="rpcSolSave">Use for Solana</button></div>
+    <div class="gm-form"><input class="inp" id="rpcHood" type="url" autocomplete="off" spellcheck="false" placeholder="https://your-robinhood-chain-rpc"><button class="btn" id="rpcHoodSave">Use for Robinhood Chain</button></div>
+    <div class="gm-msg" id="rpcMsg"></div></details></section>
+  <div class="src-list" id="srcList"></div>
+  <p class="muted" style="margin:0;font-size:12px">With the GMGN source connected, feeds, Top, token pages and Smart Tracking read GMGN's OpenAPI. Without it: pump.fun stream and on-chain curves plus Jupiter on Solana; Pons, Uniswap v4 and Blockscout on Robinhood Chain. Charts by GMGN. pump.fun and Pons launches only.</p>
+</div></div>
+
+
+<div class="modal" id="chartModal" role="dialog" aria-label="Chart"><div class="box chart-box-modal">
+  <h3><span class="chart-title" id="chartTitle"></span><button class="icon-btn" data-close title="Close">✕</button></h3>
+  <div class="chart-tools"><div class="links" id="chartLinks"></div></div>
+  <div class="chart-frame" id="chartFrame"></div>
+  <div class="chart-fallback" id="chartFallback" hidden>
+    <div class="muted" style="font-size:12px" id="chartFallbackNote"></div>
+    <div class="chart-box"><canvas id="chartCanvas" width="10" height="10"></canvas><span class="note"></span></div>
+  </div>
+  <div class="trades-head"><span>Live trades</span><span class="muted" id="chartTradesNote"></span></div>
+  <div class="trades" id="chartTrades"></div>
+</div></div>
+
+<div class="tip" id="tip" role="tooltip"></div>
+<div class="logo-zoom" id="logoZoom" aria-hidden="true"><img alt=""><span class="cap"></span></div>
+<div class="toast" id="toast"></div>
+<div class="alerts" id="alerts" aria-live="polite" aria-label="Calls"></div>

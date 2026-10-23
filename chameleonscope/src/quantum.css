@@ -1,0 +1,188 @@
+/* =======================================================================================================
+   v2.20 - |CHAMELEON⟩, quantum. The terminal keeps its two chains and their colours and gains a third one, the cyan of the quantum
+   narrative: the name is written as a quantum state (|CHAMELEON⟩, the brackets drawn, not typed, so the text stays the plain name),
+   an electron orbits the chameleon, a wavefunction runs under the header, faint interference fringes sit in the night behind the feed,
+   and a row under the cursor splits into its two states for a moment. The Quantum radar (the hottest coins on the quantum narrative)
+   and the Quantum filter live here too. Loaded last, over theme.css and portal.css. Every motion is decoration and stops for
+   reduced-motion; nothing that carries a number moves.
+   ======================================================================================================= */
+:root {
+  --q-cyan: #6ef6ff; --q-soft: rgba(110, 246, 255, .12);
+  /* the right bracket of a ket, ⟩, as a mask: the same shape in every font and at every size */
+  --ket: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 26' preserveAspectRatio='none'%3E%3Cpath d='M2.2 1.6 8.2 13 2.2 24.4' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  /* one period of a wave, for the line under the header */
+  --wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 8' preserveAspectRatio='none'%3E%3Cpath d='M0 4C7 0 7 0 14 4S21 8 28 4 35 0 42 4 49 8 56 4' fill='none' stroke='%23000' stroke-width='1.3'/%3E%3C/svg%3E");
+}
+:root[data-net="solana"] { --iris: linear-gradient(95deg, #b98aff 0%, #9945ff 20%, #6ef6ff 52%, #14f195 80%, #a6ffdc 100%); }
+:root[data-net="robinhood"] { --iris: linear-gradient(95deg, #f3ffc4 0%, #ccff00 34%, #8dff3a 62%, #6ef6ff 100%); }
+:root[data-theme="light"] { --q-cyan: #0a87a1; --q-soft: rgba(10, 135, 161, .1); }
+:root[data-theme="light"][data-net="solana"] { --iris: linear-gradient(95deg, #8a4dff 0%, #6d2fe0 22%, #0a87a1 56%, #0a9a62 100%); }
+:root[data-theme="light"][data-net="robinhood"] { --iris: linear-gradient(95deg, #7a9f00 0%, #5d7d00 45%, #0a87a1 100%); }
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) { --q-cyan: #0a87a1; --q-soft: rgba(10, 135, 161, .1); }
+  :root:not([data-theme="dark"])[data-net="solana"] { --iris: linear-gradient(95deg, #8a4dff 0%, #6d2fe0 22%, #0a87a1 56%, #0a9a62 100%); }
+  :root:not([data-theme="dark"])[data-net="robinhood"] { --iris: linear-gradient(95deg, #7a9f00 0%, #5d7d00 45%, #0a87a1 100%); }
+}
+
+/* ---------- the night: a cyan glow at the top and two sets of rings whose crossings make fringes ---------- */
+body::before {
+  background:
+    radial-gradient(60vmax 42vmax at 8% -6%, var(--glow-1), transparent 62%),
+    radial-gradient(52vmax 40vmax at 96% 8%, var(--glow-2), transparent 64%),
+    radial-gradient(44vmax 26vmax at 58% -10%, var(--q-soft), transparent 62%),
+    radial-gradient(70vmax 40vmax at 50% 112%, var(--glow-3), transparent 62%);
+}
+body::after {
+  background-image:
+    repeating-radial-gradient(circle at 28% -8%, rgba(110, 246, 255, .045) 0 1px, transparent 1.4px 26px),
+    repeating-radial-gradient(circle at 72% -8%, rgba(153, 69, 255, .05) 0 1px, transparent 1.4px 26px),
+    radial-gradient(1px 1px at 12% 18%, rgba(255, 255, 255, .55), transparent 1.5px), radial-gradient(1px 1px at 33% 72%, rgba(210, 190, 255, .45), transparent 1.5px),
+    radial-gradient(1.4px 1.4px at 58% 26%, rgba(255, 255, 255, .5), transparent 2px), radial-gradient(1px 1px at 77% 64%, rgba(190, 255, 240, .45), transparent 1.5px),
+    radial-gradient(1px 1px at 88% 12%, rgba(255, 255, 255, .4), transparent 1.5px), radial-gradient(1.2px 1.2px at 46% 92%, rgba(170, 250, 255, .35), transparent 2px),
+    radial-gradient(1px 1px at 6% 56%, rgba(255, 255, 255, .35), transparent 1.5px), radial-gradient(1px 1px at 67% 44%, rgba(200, 170, 255, .4), transparent 1.5px);
+  background-size: 100% 100%, 100% 100%, 620px 620px, 620px 620px, 620px 620px, 620px 620px, 620px 620px, 620px 620px, 620px 620px, 620px 620px;
+  background-repeat: no-repeat, no-repeat, repeat, repeat, repeat, repeat, repeat, repeat, repeat, repeat;
+}
+
+/* ---------- the name as a state: |CHAMELEON⟩, and the section names the same way ---------- */
+.brand-name::before, .brand-name::after, .cs-lead b::before, .cs-lead b::after, .rs-lead b::before, .rs-lead b::after, .qhero h2 span::before, .qhero h2 span::after, .pr-head b::before, .pr-head b::after {
+  content: ''; display: inline-block; height: 1.15em; vertical-align: -.19em; background: linear-gradient(180deg, var(--q-cyan), var(--accent-2)); }
+.brand-name::before, .cs-lead b::before, .rs-lead b::before, .qhero h2 span::before, .pr-head b::before { width: max(1.5px, .085em); margin-right: .24em; border-radius: 1px; }
+.brand-name::after, .cs-lead b::after, .rs-lead b::after, .qhero h2 span::after, .pr-head b::after { width: .42em; -webkit-mask: var(--ket) center / 100% 100% no-repeat; mask: var(--ket) center / 100% 100% no-repeat; }
+.brand-name { white-space: nowrap; }
+
+/* the mark: an electron orbits the chameleon, behind it for half the turn; the chameleon's eye is a qubit */
+.brand-mark { --o: 1px; position: relative; isolation: isolate; }
+.brand-mark .cham { position: relative; z-index: 1; }
+.brand-mark::before { content: ''; position: absolute; left: 50%; top: 52%; width: calc(46 * var(--o)); height: calc(15 * var(--o)); margin: calc(-7.5 * var(--o)) 0 0 calc(-23 * var(--o)); border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--q-cyan) 50%, transparent); transform: rotate(-22deg); z-index: 0; pointer-events: none; }
+/* v2.24: the electron runs on the compositor. A frame tilted like the ring and squeezed to its ellipse (7.5 / 23), an arm turning in it,
+   and the electron turned back and stretched again so it stays round. Two copies: the one in front of the chameleon shows for the near
+   half of the turn, the one behind it for the far half. Until 2.23 the page computed the orbit from an animated angle on every frame. */
+.q-orb { position: absolute; left: 50%; top: 52%; width: 0; height: 0; pointer-events: none; transform: rotate(-22deg) scale(1, .3261); }
+.q-orb.front { z-index: 2; }
+.q-orb.back { z-index: 0; }
+.q-orb > i { position: absolute; left: 0; top: 0; width: 0; height: 0; animation: qArm 4.8s linear infinite; }
+.q-orb > i > b { position: absolute; left: calc(21 * var(--o)); top: calc(-2 * var(--o)); width: calc(4 * var(--o)); height: calc(4 * var(--o)); border-radius: 50%;
+  background: #fff; box-shadow: 0 0 calc(6 * var(--o)) calc(1 * var(--o)) var(--q-cyan); transform: scale(1, 3.0667); }
+.q-orb.front > i > b { animation: qArmBack 4.8s linear infinite, qNear 4.8s steps(1, end) infinite; }
+.q-orb.back > i > b { opacity: 0; animation: qArmBack 4.8s linear infinite, qFar 4.8s steps(1, end) infinite; }
+@keyframes qArm { to { transform: rotate(360deg); } }
+@keyframes qArmBack { from { transform: rotate(0deg) scale(1, 3.0667); } to { transform: rotate(-360deg) scale(1, 3.0667); } }
+@keyframes qNear { 0% { opacity: 1; } 50% { opacity: 0; } 100% { opacity: 0; } }
+@keyframes qFar { 0% { opacity: 0; } 50% { opacity: 1; } 100% { opacity: 1; } }
+.cham .cham-eye { stroke: var(--q-cyan); stroke-width: .9; stroke-opacity: .85; }
+.foot-brand .brand-mark { --o: .63px; }
+@media (max-width: 560px) { .brand-mark { --o: .84px; } .foot-brand .brand-mark { --o: .63px; } }
+
+/* a wavefunction runs under the header, in the chain's colours, fading out at both ends */
+.top::after { left: 22px; right: 22px; bottom: -4px; height: 8px; opacity: .75;
+  background: linear-gradient(90deg, transparent, var(--q-cyan) 16%, var(--accent) 50%, var(--accent-2) 84%, transparent);
+  -webkit-mask: var(--wave) 0 50% / 56px 8px repeat-x; mask: var(--wave) 0 50% / 56px 8px repeat-x; } /* v2.24: the wave holds still (moving its mask repainted the strip on every frame) */
+
+/* a row under the cursor is in two states for a moment: a violet edge on the left, a cyan one on the right */
+.row:hover { box-shadow: -3px 0 0 -1px rgba(153, 69, 255, .5), 3px 0 0 -1px rgba(110, 246, 255, .5), 0 10px 34px -18px var(--accent), inset 0 1px 0 rgba(255, 255, 255, .03); }
+
+/* ---------- the quantum narrative: the flag on a row, the filter ---------- */
+.qflag { display: inline-flex; align-items: center; gap: 4px; padding: 1px 7px 1px 6px; border-radius: 999px; font-family: var(--font-mono); font-size: 10.5px; line-height: 1.5; letter-spacing: .02em; white-space: nowrap;
+  color: var(--q-cyan); border: 1px solid color-mix(in srgb, var(--q-cyan) 42%, transparent); background: color-mix(in srgb, var(--q-cyan) 9%, transparent); }
+.tp-name .qflag { font-size: 11.5px; padding: 2px 10px 2px 8px; align-self: center; }
+.q-toggle { display: inline-flex; align-items: center; gap: 6px; border-color: color-mix(in srgb, var(--q-cyan) 55%, var(--line-2)); background: color-mix(in srgb, var(--q-cyan) 10%, var(--glass-2)); box-shadow: 0 0 18px -8px var(--q-cyan); font-weight: 600; }
+.q-toggle .q-ico { display: inline-block; font-size: 14px; line-height: 1; color: var(--q-cyan); transform-origin: 50% 54%; }
+.q-toggle:hover .q-ico { animation: qSpin 2.4s linear infinite; }
+.q-toggle .cnt { font-family: var(--font-mono); font-size: 11px; opacity: .72; }
+.q-hot { font-style: normal; font-family: var(--font-mono); font-size: 9px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; padding: 1px 6px; border-radius: 999px; color: #1c0610; background: linear-gradient(90deg, #ff6f8e, #ffb45e); box-shadow: 0 0 10px rgba(255, 140, 110, .5); }
+.q-toggle[aria-pressed="true"] { background: linear-gradient(95deg, #9945ff 0%, #6ef6ff 58%, #14f195 100%); color: #04060f; border-color: transparent; box-shadow: 0 6px 22px -8px rgba(110, 246, 255, .7); }
+.q-toggle[aria-pressed="true"] .q-ico { color: #04060f; animation: qSpin 3.2s linear infinite; }
+.q-toggle[aria-pressed="true"] .cnt { opacity: .7; }
+@keyframes qSpin { to { transform: rotate(360deg); } }
+
+/* ---------- v2.21: the Quantum radar, the first block of the terminal ----------
+   The narrative's hour in four tiles (the money through it leads, as the one big figure), then its coins, hottest first. Each card's bar
+   is its heat next to the hottest coin's: one hue on a lighter track of the same hue; the exact share is in the card's tooltip. */
+.qhero { position: relative; margin: 14px 0 10px; padding: 16px 18px 12px; border-radius: 22px; overflow: hidden; isolation: isolate;
+  background: radial-gradient(120% 150% at 0% 0%, color-mix(in srgb, var(--q-cyan) 12%, transparent), transparent 55%), radial-gradient(90% 130% at 100% 0%, color-mix(in srgb, var(--accent-2) 16%, transparent), transparent 60%), var(--glass);
+  border: 1px solid color-mix(in srgb, var(--q-cyan) 40%, var(--line-2)); box-shadow: 0 18px 50px -30px var(--q-cyan), inset 0 1px 0 rgba(255, 255, 255, .04); } /* v2.24: no backdrop blur */
+.qhero[hidden] { display: none; }
+.qhero::before { content: ''; position: absolute; right: -140px; top: -170px; width: 520px; height: 520px; z-index: -1; pointer-events: none; opacity: .55;
+  background: repeating-radial-gradient(circle at 42% 50%, color-mix(in srgb, var(--q-cyan) 16%, transparent) 0 1px, transparent 1.5px 16px), repeating-radial-gradient(circle at 58% 50%, color-mix(in srgb, var(--accent-2) 16%, transparent) 0 1px, transparent 1.5px 16px);
+  -webkit-mask-image: radial-gradient(closest-side, #000, transparent); mask-image: radial-gradient(closest-side, #000, transparent); }
+.qhero::after { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--q-cyan) 20%, var(--accent-2) 70%, transparent); opacity: .9; pointer-events: none; }
+.qh-head { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.qh-atom { position: relative; flex: none; width: 46px; height: 46px; }
+.qh-atom i { position: absolute; inset: 0; border: 1.5px solid color-mix(in srgb, var(--q-cyan) 75%, transparent); border-radius: 50%; transform: rotate(0deg) scaleY(.36); animation: qhOrbit 9s linear infinite; }
+.qh-atom i:nth-child(2) { transform: rotate(60deg) scaleY(.36); border-color: color-mix(in srgb, var(--accent-2) 80%, transparent); animation-duration: 11s; }
+.qh-atom i:nth-child(3) { transform: rotate(120deg) scaleY(.36); border-color: color-mix(in srgb, var(--accent) 70%, transparent); animation-duration: 13s; animation-direction: reverse; }
+.qh-atom::after { content: ''; position: absolute; left: 50%; top: 50%; width: 9px; height: 9px; margin: -4.5px 0 0 -4.5px; border-radius: 50%; background: var(--q-cyan); box-shadow: 0 0 12px var(--q-cyan); }
+@keyframes qhOrbit { to { rotate: 360deg; } }
+.qh-title { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.qh-kicker { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-2); }
+.qh-live { position: relative; width: 7px; height: 7px; border-radius: 50%; background: var(--good); flex: none; }
+.qh-live::after, .pr-dot::after { content: ''; position: absolute; inset: 0; border-radius: 50%; background: inherit; pointer-events: none; animation: livePing 1.8s ease-out infinite; }
+@keyframes livePing { from { transform: scale(1); opacity: .55; } to { transform: scale(3.5); opacity: 0; } } /* v2.24: on the compositor */
+.qhero h2 { margin: 0; font-family: "Unbounded", var(--font-display); font-weight: 700; font-size: clamp(20px, 2.3vw, 28px); line-height: 1.15; letter-spacing: .1em; text-transform: uppercase; }
+.qhero h2 span { white-space: nowrap; background: linear-gradient(95deg, var(--q-cyan), var(--accent-2) 58%, var(--accent)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.qh-head .q-all { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; font-weight: 600; border-color: color-mix(in srgb, var(--q-cyan) 55%, var(--line-2)); }
+.qh-head .q-all .q-ico { color: var(--q-cyan); }
+.qh-head .q-all[aria-pressed="true"] .q-ico { color: inherit; }
+.qh-index { display: grid; grid-template-columns: 1.35fr 1fr 1fr 1.15fr; gap: 10px; margin: 14px 0 12px; }
+.qh-k { display: flex; flex-direction: column; justify-content: center; gap: 3px; min-width: 0; padding: 10px 14px; border-radius: 14px; background: var(--glass-2); border: 1px solid var(--line); }
+.qh-l { font-size: 11.5px; color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.qh-v { font-family: var(--font-ui); font-weight: 600; font-size: 24px; line-height: 1.12; color: var(--ink-1); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.qh-k.hero .qh-v { font-size: clamp(30px, 3.4vw, 48px); letter-spacing: -.01em; }
+.qh-k.move.up .qh-v { color: var(--up); }
+.qh-k.move.down .qh-v { color: var(--down); }
+.qh-s { font-size: 11px; color: var(--ink-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.qh-k.lead .qh-v a { display: inline-flex; align-items: center; color: inherit; text-decoration: none; max-width: 100%; }
+.qh-k.lead .qh-v a:hover { color: var(--q-cyan); }
+.qh-k.lead .logo.mini { width: 28px; height: 28px; border-radius: 9px; margin-right: 9px; flex: none; }
+.qh-track { display: flex; gap: 10px; overflow-x: auto; padding: 2px 2px 8px; scrollbar-width: thin; }
+.qh-track::-webkit-scrollbar { height: 6px; }
+.qh-track::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 999px; }
+.qh-empty { padding: 8px 4px 10px; font-size: 13px; line-height: 1.5; color: var(--ink-2); }
+.qh-mini { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-size: 13px; color: var(--ink-2); }
+.qh-mini .q-ico { font-size: 18px; color: var(--q-cyan); }
+.qh-mini b { color: var(--ink-1); }
+.qh-mini > span b:first-child { font-family: "Unbounded", var(--font-display); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; margin-right: 6px; color: var(--q-cyan); }
+.qh-mini .chip { margin-left: auto; }
+.qhero:has(.qh-mini) { padding: 12px 16px; }
+
+.qc { position: relative; flex: 0 0 auto; display: grid; grid-template-columns: 52px minmax(96px, 1fr) auto; align-items: center; gap: 12px; padding: 12px 15px 18px; min-width: 262px; max-width: 330px; border-radius: 16px; overflow: hidden; text-decoration: none; color: inherit;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--q-cyan) 8%, var(--glass-2)), var(--glass-2) 58%); border: 1px solid color-mix(in srgb, var(--q-cyan) 26%, var(--line-2));
+  transition: transform .2s ease, border-color .2s ease, box-shadow .25s ease; }
+.qc:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--q-cyan) 62%, transparent); box-shadow: -3px 0 0 -1px rgba(153, 69, 255, .55), 3px 0 0 -1px rgba(110, 246, 255, .55), 0 14px 34px -18px var(--q-cyan); }
+.qc.lead { border-color: color-mix(in srgb, var(--q-cyan) 58%, transparent); box-shadow: 0 0 0 1px color-mix(in srgb, var(--q-cyan) 16%, transparent), 0 12px 30px -18px var(--q-cyan); }
+.qc .rc-logo, .qc .rc-logo .logo { width: 52px; height: 52px; border-radius: 15px; }
+.qc-b { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.qc-b b { font-size: 15px; font-weight: 700; color: var(--ink-1); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.qc-nm { font-size: 11px; color: var(--ink-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.qc-word { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--q-cyan); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.qc-n { display: flex; flex-direction: column; align-items: flex-end; gap: 1px; font-family: var(--font-mono); white-space: nowrap; }
+.qc-n b { font-size: 16px; font-weight: 700; line-height: 1.15; color: var(--ink-1); }
+.qc-n small { font-size: 10.5px; color: var(--ink-3); }
+.qc-n small.up { color: var(--up); }
+.qc-n small.down { color: var(--down); }
+.qc-heat { position: absolute; left: 15px; right: 15px; bottom: 8px; height: 4px; border-radius: 4px; background: color-mix(in srgb, var(--q-cyan) 18%, transparent); overflow: hidden; }
+.qc-heat i { display: block; height: 100%; border-radius: 4px; background: var(--q-cyan); }
+.qc.fresh { animation: qcIn 1s cubic-bezier(.2, .8, .2, 1); }
+@keyframes qcIn { from { opacity: 0; transform: translateY(-6px) scale(.97); } to { opacity: 1; transform: none; } }
+
+@media (max-width: 860px) {
+  .qh-index { grid-template-columns: 1fr 1fr; }
+  .qh-k.hero { grid-column: 1 / -1; }
+}
+@media (max-width: 640px) {
+  .qhero { margin-top: 10px; padding: 14px 12px 10px; border-radius: 18px; }
+  .qh-atom { display: none; }
+  .qh-kicker { font-size: 9.5px; letter-spacing: .08em; }
+  .qh-head { gap: 10px; }
+  .qh-head .q-all { margin-left: 0; padding: 6px 12px; }
+  .qh-k.lead { grid-column: 1 / -1; }
+  .qh-k { padding: 9px 11px; }
+  .qh-v { font-size: 20px; }
+  .qc { min-width: 236px; grid-template-columns: 46px minmax(84px, 1fr) auto; }
+  .qc .rc-logo, .qc .rc-logo .logo { width: 46px; height: 46px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .q-orb > i, .q-orb > i > b, .top::after, .q-toggle .q-ico, .qc.fresh, .qh-atom i, .qh-live::after, .pr-dot::after, .q-hot { animation: none !important; }
+}

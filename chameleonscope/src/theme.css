@@ -1,0 +1,220 @@
+/* =======================================================================================================
+   v2.10 - the relaunch skin: the world behind the portal. Chameleon looks at two chains and takes the colour of the one on screen:
+   Solana's violet and green, Robinhood Chain's lime on black. The switch between them is not a jump: the accent, the glow and the
+   fog flow from one to the other (registered custom properties), the way a chameleon's skin turns. Everything sits on dark glass
+   over a night of violet fog and a little star dust. Loaded after styles.css: it overrides tokens and surfaces, never the layout
+   of a number. The light theme keeps the same structure in daylight colours.
+   ======================================================================================================= */
+@property --accent { syntax: '<color>'; inherits: true; initial-value: #14f195; }
+@property --accent-2 { syntax: '<color>'; inherits: true; initial-value: #9945ff; }
+@property --accent-3 { syntax: '<color>'; inherits: true; initial-value: #c9a6ff; }
+@property --glow-1 { syntax: '<color>'; inherits: true; initial-value: rgba(153, 69, 255, .3); }
+@property --glow-2 { syntax: '<color>'; inherits: true; initial-value: rgba(20, 241, 149, .14); }
+@property --glow-3 { syntax: '<color>'; inherits: true; initial-value: rgba(153, 69, 255, .1); }
+@property --tint { syntax: '<color>'; inherits: true; initial-value: #9945ff; }
+
+:root {
+  color-scheme: dark;
+  --font-display: "Unbounded", "Bricolage Grotesque", "IBM Plex Sans", system-ui, sans-serif;
+  --font-ui: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --c-sol: #9945ff; --c-sol-2: #14f195; --c-hood: #ccff00;
+  --bg: #06050c;
+  --surface: #0f0c1b; --surface-1: #0f0c1b; --surface-2: #151129; --surface-3: #1e1937;
+  --glass: rgba(17, 13, 33, .66); --glass-2: rgba(25, 19, 48, .74); --glass-3: rgba(34, 27, 62, .8);
+  --line: rgba(200, 182, 255, .085); --line-2: rgba(200, 182, 255, .16);
+  --ink: #efebfb; --ink-1: #efebfb; --ink-2: #aba4c8; --ink-3: #726b93;
+  --focus: #b48cff;
+  --good: #2bf0a0; --good-soft: rgba(43, 240, 160, .12);
+  --up: #2bf0a0; --down: #ff5f7e;
+  --warning: #ffc75a; --warning-soft: rgba(255, 199, 90, .13);
+  --critical: #ff5f7e; --critical-soft: rgba(255, 95, 126, .13);
+  --grid: #231d3a;
+  --shadow: 0 22px 64px rgba(0, 0, 0, .58);
+  --radius: 14px; --radius-s: 9px;
+  --accent: #14f195; --accent-ink: #03140c; --accent-2: #9945ff; --accent-3: #c9a6ff; --accent-soft: rgba(20, 241, 149, .14);
+  --tint: #9945ff;
+  --glow-1: rgba(153, 69, 255, .30); --glow-2: rgba(20, 241, 149, .13); --glow-3: rgba(153, 69, 255, .10);
+  --iris: linear-gradient(95deg, #b98aff 0%, #9945ff 22%, #14f195 72%, #a6ffdc 100%);
+  --skin-1: var(--glow-1); --skin-2: var(--glow-2); --skin-3: var(--glow-3);
+  --net-sol: #9945ff; --net-hood: #ccff00;
+  transition: --accent .9s ease, --accent-2 .9s ease, --accent-3 .9s ease, --glow-1 1.2s ease, --glow-2 1.2s ease, --glow-3 1.2s ease, --tint .9s ease;
+}
+:root[data-net="solana"] {
+  --accent: #14f195; --accent-ink: #03140c; --accent-2: #9945ff; --accent-3: #c9a6ff; --accent-soft: rgba(20, 241, 149, .14); --tint: #9945ff;
+  --glow-1: rgba(153, 69, 255, .30); --glow-2: rgba(20, 241, 149, .13); --glow-3: rgba(153, 69, 255, .10);
+  --iris: linear-gradient(95deg, #b98aff 0%, #9945ff 22%, #14f195 72%, #a6ffdc 100%);
+}
+:root[data-net="robinhood"] {
+  --accent: #ccff00; --accent-ink: #0d1200; --accent-2: #a8f000; --accent-3: #eaff9a; --accent-soft: rgba(204, 255, 0, .13); --tint: #ccff00;
+  --glow-1: rgba(204, 255, 0, .13); --glow-2: rgba(80, 255, 140, .08); --glow-3: rgba(120, 80, 255, .09);
+  --iris: linear-gradient(95deg, #f3ffc4 0%, #ccff00 38%, #8dff3a 70%, #4dffa0 100%);
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    color-scheme: light;
+    --bg: #f5f3fb; --surface: #ffffff; --surface-1: #ffffff; --surface-2: #f6f3fd; --surface-3: #ece7f8;
+    --glass: rgba(255, 255, 255, .78); --glass-2: rgba(248, 245, 255, .86); --glass-3: rgba(240, 235, 252, .9);
+    --line: rgba(40, 20, 90, .09); --line-2: rgba(40, 20, 90, .17);
+    --ink: #140f24; --ink-1: #140f24; --ink-2: #534a70; --ink-3: #847ba0; --focus: #6d2fe0;
+    --good: #0b8f58; --good-soft: rgba(11, 143, 88, .11); --up: #0b8f58; --down: #d0284c;
+    --warning: #b25f00; --warning-soft: rgba(245, 170, 40, .18); --critical: #d0284c; --critical-soft: rgba(208, 40, 76, .1);
+    --grid: #e4def3; --shadow: 0 18px 48px rgba(30, 16, 70, .14);
+  }
+  :root:not([data-theme="dark"])[data-net="solana"] { --accent: #0aa86a; --accent-ink: #ffffff; --accent-2: #7b2fe0; --accent-3: #6d2fe0; --accent-soft: rgba(10, 168, 106, .12); --glow-1: rgba(153, 69, 255, .14); --glow-2: rgba(20, 241, 149, .10); --glow-3: rgba(153, 69, 255, .06); }
+  :root:not([data-theme="dark"])[data-net="robinhood"] { --accent: #5d7d00; --accent-ink: #ffffff; --accent-2: #7a9f00; --accent-3: #4a6300; --accent-soft: rgba(110, 150, 0, .13); --glow-1: rgba(204, 255, 0, .18); --glow-2: rgba(80, 200, 120, .08); --glow-3: rgba(120, 80, 255, .05); }
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f5f3fb; --surface: #ffffff; --surface-1: #ffffff; --surface-2: #f6f3fd; --surface-3: #ece7f8;
+  --glass: rgba(255, 255, 255, .78); --glass-2: rgba(248, 245, 255, .86); --glass-3: rgba(240, 235, 252, .9);
+  --line: rgba(40, 20, 90, .09); --line-2: rgba(40, 20, 90, .17);
+  --ink: #140f24; --ink-1: #140f24; --ink-2: #534a70; --ink-3: #847ba0; --focus: #6d2fe0;
+  --good: #0b8f58; --good-soft: rgba(11, 143, 88, .11); --up: #0b8f58; --down: #d0284c;
+  --warning: #b25f00; --warning-soft: rgba(245, 170, 40, .18); --critical: #d0284c; --critical-soft: rgba(208, 40, 76, .1);
+  --grid: #e4def3; --shadow: 0 18px 48px rgba(30, 16, 70, .14);
+}
+:root[data-theme="light"][data-net="solana"] { --accent: #0aa86a; --accent-ink: #ffffff; --accent-2: #7b2fe0; --accent-3: #6d2fe0; --accent-soft: rgba(10, 168, 106, .12); --glow-1: rgba(153, 69, 255, .14); --glow-2: rgba(20, 241, 149, .10); --glow-3: rgba(153, 69, 255, .06); }
+:root[data-theme="light"][data-net="robinhood"] { --accent: #5d7d00; --accent-ink: #ffffff; --accent-2: #7a9f00; --accent-3: #4a6300; --accent-soft: rgba(110, 150, 0, .13); --glow-1: rgba(204, 255, 0, .18); --glow-2: rgba(80, 200, 120, .08); --glow-3: rgba(120, 80, 255, .05); }
+
+/* ---------- the night: fog in the chain's colours, a little star dust ---------- */
+body { background: var(--bg); }
+body::before {
+  background:
+    radial-gradient(60vmax 42vmax at 8% -6%, var(--glow-1), transparent 62%),
+    radial-gradient(52vmax 40vmax at 96% 8%, var(--glow-2), transparent 64%),
+    radial-gradient(70vmax 40vmax at 50% 112%, var(--glow-3), transparent 62%);
+}
+body::after {
+  opacity: .9; background-size: auto; mask-image: radial-gradient(130vmax 90vmax at 50% 0%, #000 30%, transparent 80%);
+  background-image:
+    radial-gradient(1px 1px at 12% 18%, rgba(255, 255, 255, .55), transparent 1.5px), radial-gradient(1px 1px at 33% 72%, rgba(210, 190, 255, .45), transparent 1.5px),
+    radial-gradient(1.4px 1.4px at 58% 26%, rgba(255, 255, 255, .5), transparent 2px), radial-gradient(1px 1px at 77% 64%, rgba(190, 255, 220, .45), transparent 1.5px),
+    radial-gradient(1px 1px at 88% 12%, rgba(255, 255, 255, .4), transparent 1.5px), radial-gradient(1.2px 1.2px at 46% 92%, rgba(230, 255, 160, .35), transparent 2px),
+    radial-gradient(1px 1px at 6% 56%, rgba(255, 255, 255, .35), transparent 1.5px), radial-gradient(1px 1px at 67% 44%, rgba(200, 170, 255, .4), transparent 1.5px);
+  background-repeat: repeat; background-size: 620px 620px;
+}
+:root[data-theme="light"] body::after { opacity: 0; }
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) body::after { opacity: 0; } }
+
+/* ---------- the header: a strip of dark glass ---------- */
+.top { position: relative; z-index: 44; margin-top: 12px; padding: 9px 12px 9px 14px; gap: 14px; border: 1px solid var(--line); border-radius: 18px; background: var(--glass); box-shadow: 0 10px 40px rgba(0, 0, 0, .25), inset 0 1px 0 rgba(255, 255, 255, .04); }
+.top::after { content: ''; position: absolute; left: 18px; right: 18px; bottom: -1px; height: 1px; background: var(--iris); opacity: .45; pointer-events: none; }
+.brand-name { font-family: "Unbounded", var(--font-display); font-weight: 700; font-size: 17px; letter-spacing: .16em; background: var(--iris); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.brand-mark .cham { filter: drop-shadow(0 0 12px var(--accent-soft)) drop-shadow(0 4px 14px rgba(0, 0, 0, .4)); }
+.tabs { gap: 3px; }
+.tabs button { position: relative; font-family: var(--font-ui); font-weight: 600; font-size: 14px; letter-spacing: .01em; padding: 8px 13px; border-radius: 11px; color: var(--ink-2); transition: color .2s, background .2s; }
+.tabs button:hover { background: var(--glass-2); color: var(--ink); }
+.tabs button[aria-pressed="true"] { color: var(--ink); background: var(--glass-3); box-shadow: inset 0 0 0 1px var(--line-2), 0 6px 22px -10px var(--accent); }
+.tabs button[aria-pressed="true"]::after { content: ''; position: absolute; left: 12px; right: 12px; bottom: 3px; height: 2px; border-radius: 2px; background: var(--iris); box-shadow: 0 0 10px var(--accent); }
+.netswitch { background: var(--glass-2); border-color: var(--line-2); padding: 3px; gap: 3px; }
+.netswitch button { padding: 5px 7px; font-size: 12.5px; gap: 0; transition: background .5s, color .3s, padding .3s; }
+.netswitch button .net-mark { width: 20px; height: 20px; transition: transform .3s, box-shadow .3s, filter .3s; }
+.netswitch button:not([aria-pressed="true"]) .net-mark { filter: saturate(.55) brightness(.85); }
+.netswitch button:not([aria-pressed="true"]):hover .net-mark { filter: none; transform: scale(1.08); }
+.netswitch .net-name { max-width: 0; overflow: hidden; white-space: nowrap; opacity: 0; transition: max-width .45s ease, opacity .3s, margin .3s; }
+.netswitch button[aria-pressed="true"] { padding: 5px 13px 5px 6px; background: var(--iris); color: var(--accent-ink); box-shadow: 0 0 18px -4px var(--accent); }
+.netswitch button[aria-pressed="true"] .net-name { max-width: 140px; opacity: 1; margin-left: 7px; }
+.top { gap: 10px; }
+.tabs button { font-size: 13.5px; padding: 8px 11px; }
+.net-soon { display: none !important; }
+.icon-btn { background: var(--glass-2); border-color: var(--line-2); }
+.icon-btn:hover { border-color: var(--accent); color: var(--ink); box-shadow: 0 0 14px -4px var(--accent); }
+.acct-btn { border-color: var(--line-2); background: var(--glass-2); }
+
+/* ---------- surfaces: dark glass with a fine light edge ---------- */
+/* v2.24: the glass is a translucent fill without a backdrop blur. Until 2.23 every panel and every row of the feed blurred what lay
+   behind it, and the background drifts, so each one was blurred again on every frame: the main reason the feed felt heavy */
+.context, .day-bar, .tp-card, .board, .xray-out > section, .kn-panel { background: var(--glass) !important; border-color: var(--line) !important; }
+.context { border-radius: 16px; }
+.controls { background: linear-gradient(to bottom, var(--bg) 0%, color-mix(in srgb, var(--bg) 94%, transparent) 72%, transparent 100%); }
+.chip { background: var(--glass-2); border-color: var(--line-2); transition: background .25s, color .2s, border-color .2s, box-shadow .25s; }
+.chip:hover { border-color: color-mix(in srgb, var(--accent) 55%, transparent); color: var(--ink); }
+.chip[aria-pressed="true"] { background: var(--iris); color: var(--accent-ink); border-color: transparent; box-shadow: 0 6px 22px -10px var(--accent); }
+.chip[aria-pressed="true"] .n, .chip[aria-pressed="true"] small { color: inherit; opacity: .75; }
+.btn { background: var(--glass-2); border-color: var(--line-2); transition: border-color .2s, box-shadow .2s, background .2s; }
+.btn:hover { border-color: color-mix(in srgb, var(--accent) 60%, transparent); box-shadow: 0 0 16px -6px var(--accent); }
+.btn.primary { background: var(--iris); border-color: transparent; color: var(--accent-ink); font-weight: 600; }
+.btn.primary:hover { filter: brightness(1.08); box-shadow: 0 8px 26px -10px var(--accent); }
+.inp, .sel { background: var(--glass-2) !important; border-color: var(--line-2) !important; }
+.inp:focus, .sel:focus { border-color: color-mix(in srgb, var(--accent) 65%, transparent) !important; box-shadow: 0 0 0 3px var(--accent-soft); outline: none; }
+.seg { background: var(--glass-2); border-color: var(--line-2); }
+.seg button[aria-pressed="true"] { background: var(--iris); color: var(--accent-ink); }
+
+/* ---------- the feed: rows of glass that light up in the chain's colour ---------- */
+.feed { gap: 7px; }
+.row { background: var(--glass); border-color: var(--line); border-radius: 16px; transition: border-color .2s ease, background .2s ease, box-shadow .25s ease, transform .2s ease; }
+.row::after { content: ''; position: absolute; left: -1px; top: 14px; bottom: 14px; width: 3px; border-radius: 3px; background: var(--iris); opacity: 0; transition: opacity .25s; pointer-events: none; }
+.row:hover { background: var(--glass-2); border-color: color-mix(in srgb, var(--accent) 34%, transparent); box-shadow: 0 10px 34px -18px var(--accent), inset 0 1px 0 rgba(255, 255, 255, .03); }
+.row:hover::after { opacity: 1; }
+.row.arrive, .row.fresh { animation: rowIn .7s cubic-bezier(.2, .8, .2, 1); }
+@keyframes rowIn { 0% { opacity: 0; transform: translateY(-10px) scale(.985); box-shadow: 0 0 0 1px var(--accent), 0 0 40px -6px var(--accent); } 60% { opacity: 1; box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 60%, transparent), 0 0 30px -10px var(--accent); } 100% { transform: none; box-shadow: none; } }
+.logo { border-radius: 15px; box-shadow: 0 0 0 1px rgba(255, 255, 255, .07), 0 8px 20px -8px rgba(0, 0, 0, .7); background: linear-gradient(135deg, hsl(var(--h) 40% 22%), hsl(calc(var(--h) + 50) 50% 14%)); }
+.logo .fallback { font-size: 0; }
+.logo.wait::before { content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 220%; background: linear-gradient(110deg, transparent 20%, rgba(255, 255, 255, .14) 45%, transparent 70%); animation: picWait 1.3s ease-in-out infinite; }
+@keyframes picWait { from { transform: translateX(-70.9%); } to { transform: translateX(16.4%); } } /* v2.24: the sweep moves (it was repainted every frame) */
+.row .k { letter-spacing: .09em; color: var(--ink-3); }
+.verdict { border-width: 1px; letter-spacing: .12em; }
+.verdict.STRONG { color: var(--good); border-color: color-mix(in srgb, var(--good) 70%, transparent); background: var(--good-soft); box-shadow: 0 0 16px -6px var(--good); }
+.verdict.WATCH { background: var(--glass-3); }
+.sym { font-family: var(--font-ui); font-weight: 700; }
+
+/* ---------- the footer ---------- */
+.foot { border-top: 1px solid var(--line); margin-top: 26px; padding-top: 18px; }
+.foot .foot-note { flex-basis: 100%; font-size: 11px; color: var(--ink-3); }
+
+@media (prefers-reduced-motion: reduce) {
+  :root { transition: none; }
+  .row.arrive, .row.fresh, .logo.wait::before { animation: none !important; }
+}
+
+/* ---------- About and Roadmap in the new skin ---------- */
+.pub-hero h1 { font-family: "Unbounded", var(--font-display); font-weight: 700; letter-spacing: .01em; line-height: 1.12; }
+.pub-hero h1 span { background: var(--iris); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.pub-card { background: var(--glass) !important; border-color: var(--line) !important; transition: border-color .25s, box-shadow .25s, transform .25s; }
+.pub-card:hover { border-color: color-mix(in srgb, var(--accent) 40%, transparent) !important; box-shadow: 0 16px 40px -22px var(--accent); transform: translateY(-2px); }
+.pub-card h3 { font-family: "Unbounded", var(--font-display); font-weight: 600; font-size: 15px; letter-spacing: .02em; }
+.pub-access { background: var(--glass) !important; border-color: var(--line-2) !important; }
+.pub-access h2 { font-family: "Unbounded", var(--font-display); font-weight: 600; font-size: 19px; }
+.pub-access .pub-fine { font-size: 12px; color: var(--ink-3); }
+.rm-step h3 { font-family: "Unbounded", var(--font-display); font-weight: 600; letter-spacing: .01em; }
+.rm-step .rm-node { box-shadow: 0 0 0 1px var(--line-2), 0 0 24px -6px var(--accent); }
+.rm-step.now .rm-node { background: var(--iris) !important; color: var(--accent-ink) !important; }
+
+/* ---------- v2.10: the calls showcase above the feed ---------- */
+.day-bar { border-radius: 18px; padding: 12px 16px; }
+.callstrip { gap: 16px; border-top-style: solid; border-top-color: var(--line); }
+.cs-lead { min-width: 150px; max-width: 190px; gap: 5px; }
+.cs-lead b { font-family: "Unbounded", var(--font-display); font-size: 15px; letter-spacing: .12em; background: var(--iris); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.cs-lead small { font-size: 11px; color: var(--ink-2); font-family: var(--font-mono); }
+.cs-lead .cs-week { color: var(--accent); text-transform: uppercase; letter-spacing: .08em; font-size: 10px; }
+.cs-track { gap: 10px; padding: 2px 2px 6px; scrollbar-width: thin; }
+.cs-empty { align-self: center; font-size: 12.5px; line-height: 1.5; max-width: 760px; }
+.cc { position: relative; overflow: hidden; grid-template-columns: 46px minmax(92px, 1fr) auto; gap: 11px; padding: 10px 14px 13px; min-width: 238px; border-radius: 14px; background: var(--glass-2); border-color: var(--line-2); transition: transform .2s ease, border-color .2s ease, box-shadow .25s ease; }
+.cc .rc-logo .logo { width: 46px; height: 46px; border-radius: 13px; }
+.cc:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--accent) 55%, transparent); box-shadow: 0 14px 34px -18px var(--accent); }
+.cc.won { border-color: color-mix(in srgb, var(--good) 45%, transparent); background: linear-gradient(135deg, color-mix(in srgb, var(--good) 9%, var(--glass-2)), var(--glass-2) 60%); }
+.cc.won .cc-x { text-shadow: 0 0 20px color-mix(in srgb, var(--good) 55%, transparent); }
+.cc.fresh { animation: ccIn 1.1s cubic-bezier(.2, .8, .2, 1); }
+.cc.fresh::before { content: ''; position: absolute; inset: 0; border-radius: inherit; padding: 1px; background: var(--iris); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; opacity: .9; pointer-events: none; }
+@keyframes ccIn { from { opacity: 0; transform: translateX(-14px) scale(.96); box-shadow: 0 0 46px -4px var(--accent); } to { opacity: 1; transform: none; } }
+.cc-b b { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; }
+.cc-new { font-style: normal; font-family: var(--font-mono); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; padding: 1px 6px; border-radius: 999px; background: var(--iris); color: var(--accent-ink); }
+.cc-b small { font-size: 10.5px; }
+.cc-b .cc-kind { color: var(--accent); text-transform: uppercase; letter-spacing: .08em; font-size: 9.5px; }
+.cc-x { font-size: 21px; letter-spacing: -.01em; }
+.cc-x small { font-size: 9px; margin-top: 2px; }
+.cc-bar { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--line); }
+.cc-bar i { display: block; height: 100%; background: var(--iris); }
+.rs-lead b { font-family: "Unbounded", var(--font-display); font-size: 14px; }
+.rc { background: var(--glass-2); border-color: var(--line-2); border-radius: 14px; }
+.rc-x { font-size: 20px; }
+@media (max-width: 760px) { .cs-lead { min-width: 0; max-width: none; } .callstrip { flex-direction: column; gap: 8px; } .cc { min-width: 220px; } }
+.logo.mini { width: 22px; height: 22px; border-radius: 7px; display: inline-grid; vertical-align: middle; margin-right: 6px; box-shadow: 0 0 0 1px rgba(255, 255, 255, .08); }
+.kn-tok { display: inline-flex; align-items: center; gap: 0; }
+.wa-tok .logo.mini { margin-right: 6px; }
+@media (max-width: 640px) {
+  .feed-head { flex-wrap: wrap; gap: 4px 10px; }
+  .feed-head #feedRule { order: 3; flex-basis: 100%; }
+  .top { padding: 10px 12px; }
+  .top .brand-name { font-size: 15px; }
+}

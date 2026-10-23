@@ -1,0 +1,27 @@
+{
+  "data": [
+    {
+      "id": "robinhood_0xpool1", "type": "pool",
+      "attributes": {"name": "MEME / USDG 1.37%", "address": "0xpool1", "pool_created_at": "2026-09-04T04:10:31Z",
+                     "fdv_usd": "110621631.5", "market_cap_usd": "0.0", "reserve_in_usd": "2307857.6",
+                     "volume_usd": {"h24": "5000000"}},
+      "relationships": {"base_token": {"data": {"id": "robinhood_0xMEME", "type": "token"}},
+                        "dex": {"data": {"id": "uniswap-v4-robinhood", "type": "dex"}}}
+    },
+    {
+      "id": "robinhood_0xpool2", "type": "pool",
+      "attributes": {"name": "CHUMP / WETH 1%", "address": "0xpool2", "pool_created_at": "2026-07-31T01:44:31Z",
+                     "fdv_usd": "34830922.2", "market_cap_usd": "34830922.6", "reserve_in_usd": "1067425.4"},
+      "relationships": {"base_token": {"data": {"id": "robinhood_0xCHUMP", "type": "token"}}}
+    },
+    {
+      "id": "solana_pool3", "type": "pool",
+      "attributes": {"name": "DUST / SOL", "address": "pool3", "pool_created_at": "2026-09-04T08:49:10Z",
+                     "fdv_usd": "12969.59", "market_cap_usd": null, "reserve_in_usd": "13348.7"},
+      "relationships": {"base_token": {"data": {"id": "solana_DUSTMINT", "type": "token"}}}
+    },
+    {
+      "id": "broken", "type": "pool", "attributes": {"name": "X / Y"}, "relationships": {}
+    }
+  ]
+}
