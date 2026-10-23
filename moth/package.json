@@ -1,0 +1,6 @@
+{
+  "name": "moth-vendored",
+  "private": true,
+  "type": "module",
+  "license": "MIT"
+}

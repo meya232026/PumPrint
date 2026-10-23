@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <title>Moth</title>
+  <defs>
+    <radialGradient id="glow" cx="64" cy="60" r="66" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFB547" stop-opacity=".66"/>
+      <stop offset=".36" stop-color="#FF9440" stop-opacity=".2"/>
+      <stop offset="1" stop-color="#FF9440" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="fore" x1="10" y1="30" x2="60" y2="70" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#E9E3FF"/>
+      <stop offset="1" stop-color="#A996F0"/>
+    </linearGradient>
+    <linearGradient id="hind" x1="34" y1="72" x2="58" y2="102" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#A894F0"/>
+      <stop offset="1" stop-color="#7A64D2"/>
+    </linearGradient>
+    <clipPath id="abdomen"><ellipse cx="64" cy="83" rx="8.6" ry="17"/></clipPath>
+    <g id="half">
+      <path d="M60 71 C48 73 37 80 34 91 C32 99 39 104 47 100 C55 96 60 87 62 77 Z" fill="url(#hind)"/>
+      <path d="M61 56 C52 42 34 30 18 31 C11 31.5 8.5 38 12 45 C17 58 34 70 60 72 Z" fill="url(#fore)"/>
+      <path d="M18 31 C30 31 44 38 54 49" fill="none" stroke="#F6F2FF" stroke-width="1.6" stroke-linecap="round" opacity=".75"/>
+      <circle cx="29" cy="47" r="6.4" fill="#FFB547"/>
+      <circle cx="29" cy="47" r="2.7" fill="#1A1638"/>
+      <path d="M58 24 C56 29 58.5 34 61 37" fill="none" stroke="#F7F0DF" stroke-width="2.2" stroke-linecap="round"/>
+      <path d="M58 24 C51 21 46 15 45 9 C50 10 56 16 58 24 Z" fill="#F7F0DF"/>
+      <path d="M57 22.6 L48.6 12.4 M54.4 19.6 L51.6 20.4 M51.8 16.4 L49 17 M55.6 17.8 L54.4 15.2 M52.8 14.6 L51.8 12" stroke="#CDBE9F" stroke-width=".9" stroke-linecap="round"/>
+    </g>
+  </defs>
+
+  <rect width="128" height="128" rx="30" fill="#1A1638"/>
+  <rect width="128" height="128" rx="30" fill="url(#glow)"/>
+
+  <g transform="translate(0 7)">
+    <use href="#half"/>
+    <use href="#half" transform="translate(128 0) scale(-1 1)"/>
+    <ellipse cx="64" cy="83" rx="8.6" ry="17" fill="#EADCBC"/>
+    <g clip-path="url(#abdomen)" stroke="#CFBC95" stroke-width="2.2">
+      <path d="M54 80 H74 M54 87 H74 M54 94 H74"/>
+    </g>
+    <circle cx="64" cy="60" r="11.5" fill="#F7F0DF"/>
+    <g fill="#F7F0DF">
+      <circle cx="55" cy="65" r="3"/><circle cx="73" cy="65" r="3"/>
+      <circle cx="58.5" cy="69.5" r="2.8"/><circle cx="69.5" cy="69.5" r="2.8"/><circle cx="64" cy="71.2" r="3"/>
+    </g>
+    <circle cx="64" cy="45" r="10" fill="#F7F0DF"/>
+    <ellipse cx="59.6" cy="45.6" rx="3.5" ry="4.1" fill="#1A1638"/>
+    <ellipse cx="68.4" cy="45.6" rx="3.5" ry="4.1" fill="#1A1638"/>
+    <circle cx="60.7" cy="44.2" r="1.25" fill="#fff"/>
+    <circle cx="69.5" cy="44.2" r="1.25" fill="#fff"/>
+  </g>
+</svg>

@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Verify your wallet · Moth</title>
+  <link rel="icon" href="/static/moth.svg">
+  <style>
+    @font-face { font-family: Fraunces; src: url(/static/fraunces-600.woff2) format("woff2"); font-weight: 600; }
+    :root {
+      color-scheme: dark;
+      --night: #13112a; --dusk: #1c1936; --dusk-2: #25213f; --rule: #2c2850;
+      --moon: #eeeafb; --wing: #a39bcb; --wing-dim: #726c9a;
+      --lamp: #ffb547; --lamp-rgb: 255 181 71; --on-lamp: #1a1638; --danger: #ff7a8a;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        color-scheme: light;
+        --night: #f6f4fb; --dusk: #fff; --dusk-2: #efecf8; --rule: #e2deef;
+        --moon: #1b1834; --wing: #5f5888; --wing-dim: #8c86ad;
+        --lamp: #b45f00; --lamp-rgb: 255 170 51; --on-lamp: #fff; --danger: #c42d45;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 32px 16px;
+      background: radial-gradient(60% 50% at 50% 0%, rgb(var(--lamp-rgb) / .14), transparent 70%), var(--night);
+      color: var(--moon); font: 15px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    }
+    main { width: min(440px, 100%); }
+    .mark { display: block; width: 72px; height: 72px; margin-bottom: 20px; border-radius: 18px; }
+    h1 { margin: 0 0 8px; font: 600 30px/1.15 Fraunces, Georgia, serif; letter-spacing: -.01em; }
+    p { margin: 0 0 14px; color: var(--wing); }
+    p strong { color: var(--moon); font-weight: 600; }
+    .wallets { display: grid; gap: 8px; margin: 22px 0 10px; }
+    button, .btn {
+      all: unset; box-sizing: border-box; display: flex; align-items: center; justify-content: center; gap: 8px;
+      height: 46px; padding: 0 16px; border-radius: 11px; cursor: pointer; font-weight: 650; font-size: 15px;
+      background: var(--dusk); border: 1px solid var(--rule); color: var(--moon);
+    }
+    button:hover, .btn:hover { border-color: var(--wing-dim); }
+    button:focus-visible, .btn:focus-visible { outline: 2px solid var(--lamp); outline-offset: 2px; }
+    button.primary, .btn.primary { background: var(--lamp); border-color: var(--lamp); color: var(--on-lamp); }
+    button[disabled] { opacity: .55; cursor: default; }
+    .step { display: flex; gap: 12px; align-items: center; margin: 22px 0; padding: 14px 16px; border-radius: 12px; background: var(--dusk); border: 1px solid var(--rule); }
+    .step p { margin: 0; color: var(--moon); }
+    .spinner { flex: none; width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--rule); border-top-color: var(--lamp); animation: spin .8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .error { color: var(--danger); }
+    .done h1::before { content: ""; display: block; width: 40px; height: 40px; margin-bottom: 14px; border-radius: 50%;
+      background: var(--lamp) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m6 12.5 4 4 8-9' fill='none' stroke='%231a1638' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/24px no-repeat; }
+    details { margin-top: 18px; color: var(--wing); font-size: 13.5px; }
+    summary { cursor: pointer; }
+    .key { display: flex; gap: 8px; margin-top: 10px; }
+    .key input { flex: 1; min-width: 0; height: 40px; padding: 0 12px; border-radius: 9px; border: 1px solid var(--rule); background: var(--dusk); color: var(--moon); font: 13px ui-monospace, Menlo, Consolas, monospace; }
+    .key button { height: 40px; font-size: 13.5px; }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px; }
+    .row > * { flex: 1; }
+    .fine { font-size: 13px; color: var(--wing-dim); margin-top: 22px; }
+    [hidden] { display: none !important; }
+    @media (prefers-reduced-motion: reduce) { .spinner { animation: none; } }
+  </style>
+</head>
+<body>
+  <main id="app">
+    <img class="mark" src="/static/moth.svg" alt="">
+    <h1 id="title">Verify your wallet</h1>
+    <p id="lead">Loading…</p>
+
+    <div class="wallets" id="wallets"></div>
+    <p id="no-wallet" hidden>No Solana wallet in this browser. Install Phantom, Solflare or Backpack, then reload this page.</p>
+
+    <div class="step" id="step" hidden><span class="spinner" aria-hidden="true"></span><p id="step-text"></p></div>
+    <p class="error" id="error" role="alert" hidden></p>
+    <div class="row" id="retry-row" hidden>
+      <button type="button" id="retry">Try again</button>
+      <a class="btn primary" id="buy" target="_blank" rel="noopener noreferrer" hidden>Get the token</a>
+    </div>
+
+    <div id="success" hidden>
+      <p>Go back to the Moth side panel: it unlocks on its own within a few seconds. You can close this tab.</p>
+      <details>
+        <summary>Panel didn’t unlock? Copy your access key</summary>
+        <p class="fine">Paste it under Settings, Holder access, “Have an access key?”. It works for 30 days while the wallet keeps its balance.</p>
+        <div class="key"><input id="key" readonly aria-label="Access key"><button type="button" id="copy">Copy</button></div>
+      </details>
+    </div>
+
+    <p class="fine" id="fine">Signing proves you own the wallet. It is not a transaction, costs nothing, and Moth never asks for your seed phrase.</p>
+  </main>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+    const session = new URLSearchParams(location.search).get('session') || '';
+    let config = null;
+    let busy = false;
+
+    const fmt = (n) => Number(n).toLocaleString('en-US', { maximumFractionDigits: 2 });
+    const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+
+    function detectWallets() {
+      const found = [];
+      const add = (name, provider, oneArgSign = false) => {
+        if (provider && !found.some((w) => w.provider === provider)) found.push({ name, provider, oneArgSign });
+      };
+      if (window.phantom?.solana?.isPhantom) add('Phantom', window.phantom.solana);
+      if (window.solflare?.isSolflare) add('Solflare', window.solflare);
+      if (window.backpack?.isBackpack) add('Backpack', window.backpack, true);
+      if (window.solana) add(window.solana.isPhantom ? 'Phantom' : 'Solana wallet', window.solana);
+      return found;
+    }
+
+    function renderWallets() {
+      const list = detectWallets();
+      const box = $('wallets');
+      box.replaceChildren(
+        ...list.map((w) => {
+          const b = document.createElement('button');
+          b.type = 'button';
+          b.className = list.length === 1 ? 'primary' : '';
+          b.textContent = `Sign with ${w.name}`;
+          b.addEventListener('click', () => verifyWith(w));
+          return b;
+        }),
+      );
+      $('no-wallet').hidden = list.length > 0;
+    }
+
+    function step(text) {
+      $('step').hidden = !text;
+      $('step-text').textContent = text || '';
+    }
+
+    function fail(message, buyUrl) {
+      busy = false;
+      step('');
+      $('error').textContent = message;
+      $('error').hidden = false;
+      $('retry-row').hidden = false;
+      $('buy').hidden = !buyUrl;
+      if (buyUrl) $('buy').href = buyUrl;
+      $('wallets').hidden = true;
+    }
+
+    function toBase64(bytes) {
+      let s = '';
+      for (const b of bytes) s += String.fromCharCode(b);
+      return btoa(s);
+    }
+
+    async function verifyWith(w) {
+      if (busy) return;
+      busy = true;
+      $('error').hidden = true;
+      $('retry-row').hidden = true;
+      $('wallets').hidden = true;
+      try {
+        step(`Approve the connection in ${w.name}.`);
+        const res = await w.provider.connect();
+        const pk = res?.publicKey || w.provider.publicKey;
+        const wallet = pk?.toBase58?.() || pk?.toString?.();
+        if (!wallet) throw new Error(`${w.name} didn’t share an address.`);
+
+        const nonceRes = await fetch(`/api/nonce?wallet=${encodeURIComponent(wallet)}`);
+        const nonce = await nonceRes.json();
+        if (!nonceRes.ok) return fail(nonce.message || 'The server refused the request.');
+
+        step(`Sign the message in ${w.name}. It costs nothing.`);
+        const bytes = new TextEncoder().encode(nonce.message);
+        const signed = w.oneArgSign ? await w.provider.signMessage(bytes) : await w.provider.signMessage(bytes, 'utf8');
+        const raw = signed?.signature ?? signed;
+        const sig = raw instanceof Uint8Array ? raw : new Uint8Array(raw?.data ?? raw);
+
+        step('Checking your balance…');
+        const verifyRes = await fetch('/api/verify', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ wallet, nonce: nonce.nonce, signature: toBase64(sig), session }),
+        });
+        const body = await verifyRes.json();
+        if (!verifyRes.ok) return fail(body.message || 'Verification failed.', body.error === 'insufficient_balance' ? body.buyUrl : '');
+        done(body);
+      } catch (err) {
+        const rejected = err?.code === 4001 || /reject|cancel|denied/i.test(err?.message || '');
+        fail(rejected ? 'You cancelled in the wallet. Try again when you’re ready.' : err?.message || 'Something went wrong.');
+      }
+    }
+
+    function done(body) {
+      busy = false;
+      step('');
+      document.body.classList.add('done');
+      $('app').classList.add('done');
+      $('title').textContent = 'You’re verified';
+      $('lead').innerHTML = `Wallet <strong>${esc(body.wallet)}</strong> holds <strong>${fmt(body.balance)} $${esc(body.symbol)}</strong>. Short windows and alerts are unlocked.`;
+      $('success').hidden = false;
+      $('key').value = body.key;
+      $('fine').hidden = true;
+    }
+
+    $('retry').addEventListener('click', () => {
+      $('error').hidden = true;
+      $('retry-row').hidden = true;
+      $('wallets').hidden = false;
+      renderWallets();
+    });
+
+    $('copy').addEventListener('click', async () => {
+      $('key').select();
+      try {
+        await navigator.clipboard.writeText($('key').value);
+        $('copy').textContent = 'Copied';
+      } catch {
+        document.execCommand('copy');
+        $('copy').textContent = 'Copied';
+      }
+    });
+
+    (async function start() {
+      try {
+        config = await (await fetch('/api/config')).json();
+      } catch {
+        $('lead').textContent = 'Can’t reach the Moth server. Reload the page to try again.';
+        return;
+      }
+      if (!config.holderMode) {
+        $('lead').textContent = 'Holder mode is off on this server, so every window and alerts are already unlocked. You can close this tab.';
+        $('fine').hidden = true;
+        return;
+      }
+      const h = config.holder;
+      $('lead').innerHTML = `Sign a message with a wallet that holds at least <strong>${fmt(h.minBalance)} $${esc(h.symbol)}</strong> to unlock short windows and alerts in Moth.`;
+      $('buy').textContent = `Get $${h.symbol}`;
+      renderWallets();
+      // Wallet extensions sometimes inject a moment after the page loads.
+      setTimeout(renderWallets, 700);
+      window.addEventListener('load', () => setTimeout(renderWallets, 200));
+    })();
+  </script>
+</body>
+</html>
