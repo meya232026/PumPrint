@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Pumprint</title>
+  <meta name="description" content="Every pump leaves a print. Kolibri Search grades the callers, Moth Radar shows which words new pump.fun launches are named after.">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta property="og:title" content="Pumprint">
+  <meta property="og:description" content="Every pump leaves a print. Read who called it and what is being launched.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=JetBrains+Mono:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Alfa+Slab+One&family=Bungee&family=Playfair+Display:ital,wght@1,900&family=Rubik+Mono+One&family=Rye&family=Special+Elite&family=UnifrakturMaguntia&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.%24">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <script src="config.js"></script>
+  <script src="assets/vendor/three.min.js" defer></script>
+  <script type="module" src="assets/js/app.js"></script>
+</head>
+<body>
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-print" viewBox="0 0 32 32"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M13.95 21.6C13.95 21.37 13.95 20.69 13.95 20.23C13.95 19.77 13.95 19.32 13.95 18.86C13.95 18.4 13.95 17.95 13.95 17.49C13.95 17.03 13.94 16.57 13.95 16.12C13.96 15.66 13.9 15.19 13.99 14.75C14.09 14.31 14.23 13.83 14.5 13.49C14.76 13.14 15.18 12.79 15.58 12.69C15.98 12.59 16.53 12.69 16.89 12.9C17.26 13.11 17.57 13.54 17.76 13.94C17.95 14.33 18 14.82 18.05 15.27C18.1 15.72 18.05 16.18 18.05 16.64C18.05 17.1 18.05 17.55 18.05 18.01C18.05 18.47 18.05 19.15 18.05 19.38M10.11 26C10.13 25.76 10.17 25.05 10.19 24.57C10.22 24.1 10.24 23.62 10.26 23.14C10.28 22.67 10.29 22.19 10.3 21.71C10.3 21.24 10.3 20.76 10.3 20.28C10.3 19.8 10.3 19.33 10.3 18.85C10.3 18.37 10.3 17.9 10.3 17.42C10.3 16.94 10.29 16.47 10.3 15.99C10.31 15.51 10.28 15.03 10.34 14.56C10.39 14.09 10.49 13.61 10.63 13.16C10.77 12.71 10.97 12.26 11.2 11.85C11.44 11.44 11.72 11.05 12.05 10.7C12.37 10.36 12.74 10.04 13.14 9.78C13.53 9.52 13.97 9.31 14.42 9.17C14.87 9.02 15.36 8.93 15.83 8.92C16.3 8.9 16.79 8.96 17.25 9.07C17.7 9.18 18.16 9.37 18.57 9.6C18.98 9.83 19.52 10.31 19.71 10.46M21.05 12.34C21.13 12.56 21.39 13.18 21.5 13.62C21.61 14.06 21.66 14.51 21.69 14.96C21.73 15.41 21.7 15.87 21.7 16.32C21.7 16.77 21.7 17.22 21.7 17.67C21.7 18.13 21.7 18.58 21.7 19.03C21.7 19.48 21.7 19.94 21.7 20.39C21.7 20.84 21.7 21.29 21.7 21.74C21.69 22.2 21.67 22.87 21.67 23.1M6.19 29.2C6.19 28.96 6.19 28.24 6.21 27.76C6.24 27.27 6.29 26.8 6.33 26.32C6.37 25.84 6.42 25.36 6.46 24.88C6.5 24.4 6.54 23.92 6.57 23.44C6.6 22.95 6.63 22.47 6.64 21.99C6.65 21.51 6.65 21.03 6.65 20.55C6.65 20.07 6.65 19.58 6.65 19.1C6.65 18.62 6.65 18.14 6.65 17.66C6.65 17.18 6.65 16.69 6.65 16.21C6.65 15.73 6.63 15.25 6.66 14.77C6.69 14.29 6.74 13.81 6.82 13.33C6.9 12.86 7.01 12.39 7.15 11.93C7.29 11.47 7.46 11.01 7.66 10.57C7.85 10.14 8.22 9.51 8.34 9.3M10.26 7.03C10.45 6.89 10.98 6.45 11.37 6.2C11.75 5.96 12.16 5.74 12.58 5.55C13 5.37 13.44 5.21 13.89 5.1C14.33 4.98 14.79 4.9 15.25 4.86C15.7 4.82 16.17 4.82 16.63 4.85C17.09 4.89 17.55 4.96 17.99 5.07C18.44 5.18 18.88 5.32 19.3 5.5C19.72 5.68 20.14 5.9 20.53 6.14C20.92 6.38 21.29 6.65 21.64 6.95C21.99 7.25 22.33 7.57 22.63 7.92C22.94 8.26 23.22 8.63 23.48 9.01C23.73 9.39 23.96 9.79 24.17 10.2C24.37 10.62 24.55 11.04 24.7 11.48C24.86 11.91 24.98 12.36 25.08 12.81C25.18 13.26 25.25 13.71 25.3 14.17C25.34 14.63 25.34 15.09 25.35 15.55C25.36 16.01 25.35 16.47 25.35 16.93C25.35 17.39 25.35 17.85 25.35 18.32C25.35 18.78 25.35 19.24 25.35 19.7C25.35 20.16 25.36 20.62 25.35 21.08C25.34 21.54 25.34 22 25.32 22.46C25.29 22.92 25.25 23.38 25.21 23.84C25.16 24.3 25.1 24.75 25.05 25.21C24.99 25.67 24.89 26.35 24.86 26.58M3.25 23.6C3.24 23.36 3.21 22.66 3.21 22.19C3.2 21.72 3.2 21.25 3.2 20.78C3.2 20.31 3.2 19.84 3.2 19.37C3.2 18.9 3.2 18.43 3.2 17.96C3.2 17.49 3.2 17.02 3.2 16.55C3.2 16.08 3.19 15.61 3.2 15.14C3.22 14.67 3.23 14.2 3.28 13.73C3.33 13.26 3.41 12.8 3.5 12.34C3.6 11.88 3.72 11.42 3.86 10.97C4 10.52 4.16 10.08 4.34 9.65C4.52 9.22 4.73 8.79 4.95 8.38C5.18 7.97 5.43 7.56 5.69 7.18C5.96 6.79 6.25 6.42 6.55 6.06C6.86 5.7 7.18 5.36 7.52 5.04C7.86 4.71 8.22 4.41 8.6 4.12C8.97 3.84 9.36 3.58 9.77 3.34C10.17 3.09 10.59 2.88 11.01 2.68C11.44 2.49 11.88 2.32 12.33 2.18C12.78 2.03 13.24 1.91 13.7 1.82C14.16 1.73 14.62 1.67 15.09 1.63C15.56 1.6 16.03 1.59 16.5 1.61C16.97 1.63 17.44 1.68 17.9 1.75C18.37 1.83 19.05 2.01 19.28 2.06M22.57 3.54C22.76 3.68 23.33 4.06 23.68 4.34C24.04 4.63 24.38 4.93 24.7 5.26C25.03 5.58 25.34 5.92 25.62 6.27C25.91 6.62 26.19 6.99 26.44 7.37C26.69 7.75 26.92 8.14 27.14 8.55C27.35 8.95 27.54 9.37 27.72 9.79C27.89 10.21 28.04 10.64 28.18 11.08C28.31 11.51 28.42 11.96 28.51 12.41C28.6 12.85 28.67 13.3 28.72 13.76C28.77 14.21 28.79 14.67 28.8 15.13C28.81 15.58 28.8 16.04 28.8 16.49C28.8 16.95 28.8 17.41 28.8 17.86C28.8 18.32 28.8 18.78 28.8 19.23C28.8 19.69 28.8 20.15 28.8 20.6C28.8 21.06 28.8 21.52 28.79 21.97C28.77 22.43 28.72 23.11 28.7 23.34"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M8.5 8.5h10v11h-10zM5.5 15.5v-11h10"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-pill" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3.2" y="8.4" width="17.6" height="7.2" rx="3.6" transform="rotate(-40 12 12)"/><path d="m11.1 9.3 3.6 4.9" stroke-linecap="round" transform="rotate(-6 12 12)"/></g></symbol>
+    <symbol id="i-plane" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" d="M20.5 4 3.5 11l6 2.2L20.5 4ZM20.5 4l-3 15.5-8-6.3M9.5 13.2v5.3l2.8-3.1"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="m8.5 7.5-4.5 4.5 4.5 4.5M15.5 7.5l4.5 4.5-4.5 4.5M13.4 5.5l-2.8 13"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M10.5 17a6.5 6.5 0 1 0 0-13 6.5 6.5 0 0 0 0 13ZM20 20l-4.6-4.6"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="m12 3.6 2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.2-4.1 5.8-.8L12 3.6Z"/></symbol>
+    <symbol id="i-star-fill" viewBox="0 0 24 24"><path fill="currentColor" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="m12 3.6 2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.2-4.1 5.8-.8L12 3.6Z"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="i-split" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="14" rx="2.2"/><path d="M12 5v14" stroke-linecap="round"/></g></symbol>
+    <symbol id="i-swap" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M7 7.5h12m-3.5-3.5L19 7.5 15.5 11M17 16.5H5m3.5-3.5L5 16.5 8.5 20"/></symbol>
+    <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6" fill="none" stroke="currentColor" stroke-width="1.7"/><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" d="M9.6 9.6a2.5 2.5 0 1 1 3.6 2.2c-.8.4-1.2 1-1.2 1.8v.4"/><circle cx="12" cy="16.9" r="1.05" fill="currentColor"/></symbol>
+    <symbol id="i-out" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 11V8a5 5 0 0 1 10 0v3M5.5 11h13v9.5h-13z"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 4v11m-5-5 5 5 5-5M5 19.5h14"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M5 12h13m-5-5 5 5-5 5"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M4 7.5h16M4 12h16M4 16.5h16"/></symbol>
+  </svg>
+
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-head" id="site-head">
+    <div class="head-inner">
+      <a class="brand" href="#about" data-nav="about" aria-label="Pumprint, home">
+        <svg class="brand-mark" aria-hidden="true"><use href="#i-print"/></svg>
+        <span class="ransom" data-ransom data-size="head">PUMPRINT</span>
+      </a>
+      <nav class="tabs" id="tabs" aria-label="Sections">
+        <a href="#about" data-nav="about">About</a>
+        <div class="tools-menu" id="tools-menu">
+          <button class="tools-btn" id="tools-btn" type="button" aria-expanded="false" aria-controls="tools-panel">Tools <span class="tools-n">6</span><svg aria-hidden="true"><use href="#i-chevron"/></svg></button>
+          <div class="tools-panel" id="tools-panel">
+            <a href="#kolibri" data-nav="kolibri" data-tool><b>Kolibri Search</b><span>Any caller’s calls, measured from 1 minute to 24 hours</span><i>SOL</i></a>
+            <a href="#moth" data-nav="moth" data-tool><b>Moth Radar</b><span>The words new pump.fun launches are made of</span><i>SOL</i></a>
+            <a href="#chameleon" data-nav="chameleon" data-tool><b>Chameleonscope</b><span>Launches behind a rug gate, calls and smart money</span><i>SOL · HOOD</i></a>
+            <a href="#loxley" data-nav="loxley" data-tool><b>Loxley</b><span>Pons V2 sniper on paper, out the second the dev sells</span><i>HOOD</i></a>
+            <a href="#canary" data-nav="canary" data-tool><b>Canary</b><span>Watches a position after the buy: quiet, watch, leave</span><i>HOOD</i></a>
+            <a href="#fomo" data-nav="fomo" data-tool><b>Fomo Radar</b><span>Proven fomo.family wallets piling into one token</span><i>HOOD</i></a>
+          </div>
+        </div>
+        <a href="#learn" data-nav="learn">Learn</a>
+        <a href="#roadmap" data-nav="roadmap">Roadmap</a>
+        <div class="socials menu-socials" data-socials>
+          <button class="soc" type="button" data-social="pump" aria-label="pump.fun" title="pump.fun"><svg aria-hidden="true"><use href="#i-pill"/></svg></button>
+          <button class="soc soc-x" type="button" data-social="x" aria-label="X" title="X"><span aria-hidden="true">X</span></button>
+          <button class="soc" type="button" data-social="telegram" aria-label="Telegram" title="Telegram"><svg aria-hidden="true"><use href="#i-plane"/></svg></button>
+          <button class="soc" type="button" data-social="github" aria-label="GitHub" title="GitHub"><svg aria-hidden="true"><use href="#i-code"/></svg></button>
+        </div>
+      </nav>
+      <div class="head-right">
+        <button class="ca-pill" type="button" data-copy-ca title="Copy the contract address">
+          <span class="ca-k">CA</span><span class="ca-v" data-ca-value>Soon…pump</span><svg aria-hidden="true"><use href="#i-copy"/></svg>
+        </button>
+        <div class="socials" data-socials>
+          <button class="soc" type="button" data-social="pump" aria-label="pump.fun" title="pump.fun"><svg aria-hidden="true"><use href="#i-pill"/></svg></button>
+          <button class="soc soc-x" type="button" data-social="x" aria-label="X" title="X"><span aria-hidden="true">X</span></button>
+          <button class="soc" type="button" data-social="telegram" aria-label="Telegram" title="Telegram"><svg aria-hidden="true"><use href="#i-plane"/></svg></button>
+          <button class="soc" type="button" data-social="github" aria-label="GitHub" title="GitHub"><svg aria-hidden="true"><use href="#i-code"/></svg></button>
+        </div>
+        <button class="menu-btn" id="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="tabs"><svg aria-hidden="true"><use href="#i-menu"/></svg></button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ABOUT ------------------------------------------------------------ -->
+    <section class="view" id="view-about" data-view="about">
+      <div class="hero" id="hero">
+        <div class="hero-stage" id="print-stage" aria-hidden="true">
+          <canvas id="print-canvas"></canvas>
+          <svg class="print-fallback" viewBox="0 0 32 32" hidden><use href="#i-print"/></svg>
+        </div>
+        <div class="hero-copy wrap">
+          <div class="label-row"><span>01</span><span>What you see</span></div>
+          <h1 class="hero-title"><span class="heavy">Every<br>pump</span><span class="light">leaves a<br>print.</span></h1>
+          <p class="hero-lead">Everyone sees the candle. Few see the prints under it: the copycat launches that show a story forming, and the callers who posted it first. Pumprint reads both.</p>
+          <p class="cue">Scroll to read the print <span aria-hidden="true">↓</span></p>
+        </div>
+        <p class="touch-hint" id="touch-hint"><span class="dot" aria-hidden="true"></span><span data-touch-text>Touch the print</span></p>
+      </div>
+
+      <div class="ticker" aria-label="Coins in the print">
+        <span class="ticker-k" data-ticker-label>In the print now</span>
+        <div class="ticker-track"><div class="ticker-run" id="ticker-run"></div></div>
+      </div>
+
+      <section class="block wrap" aria-labelledby="h-tools">
+        <div class="label-row"><span>02</span><span>Six tools</span></div>
+        <div class="block-head">
+          <h2 id="h-tools">Read the print.</h2>
+          <p>Six open-source tools running live on this site, on Solana and Robinhood Chain. No wallet, no sign-up, no key.</p>
+        </div>
+        <div class="tool-cards">
+          <article class="tool-card">
+            <p class="eyebrow">Kolibri Search</p>
+            <h3>Who called it.</h3>
+            <p>Paste an X account and see every token it called: the market cap when the post went out, and what it was 1 minute, 5 minutes, 1 hour and 24 hours later. Graded A to F.</p>
+            <div class="mini mini-k" id="mini-kolibri" aria-hidden="true"></div>
+            <a class="btn btn-light" href="#kolibri" data-nav="kolibri">Open Kolibri Search <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </article>
+          <article class="tool-card">
+            <p class="eyebrow">Moth Radar</p>
+            <h3>What’s being launched.</h3>
+            <p>Every new pump.fun launch, split into words. See which words take over the last hour, how fast they grow, and which token behind each word people are trading.</p>
+            <div class="mini mini-m" id="mini-moth" aria-hidden="true"></div>
+            <a class="btn btn-light" href="#moth" data-nav="moth">Open Moth Radar <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </article>
+        </div>
+        <div class="tool-cards tool-cards-sm">
+          <article class="tool-card tool-card-sm">
+            <p class="eyebrow">Chameleonscope <span class="tc-chain">SOL · HOOD</span></p>
+            <h3>The trenches, gated.</h3>
+            <p>New, almost bonded and migrated launches on pump.fun and Pons, checked the second they land: dev share, bundles, snipers, insiders, mint and freeze. Its own calls, smart money and KOL buys.</p>
+            <a class="btn btn-line btn-sm" href="#chameleon" data-nav="chameleon">Open <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </article>
+          <article class="tool-card tool-card-sm">
+            <p class="eyebrow">Loxley <span class="tc-chain">HOOD · paper</span></p>
+            <h3>The exit is arithmetic.</h3>
+            <p>A sniper for Pons V2 launches that scores each one with its reasons, fires once the 99% opening tax decays, and leaves on its rules or when the deployer moves. On paper here.</p>
+            <a class="btn btn-line btn-sm" href="#loxley" data-nav="loxley">Open <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </article>
+          <article class="tool-card tool-card-sm">
+            <p class="eyebrow">Canary <span class="tc-chain">HOOD · read-only</span></p>
+            <h3>After the buy.</h3>
+            <p>A watchtower for Pons V2 positions: deployer share, curve reserve, pool liquidity, swaps. Ten plain rules turn a token from QUIET to WATCH or LEAVE. No key at all.</p>
+            <a class="btn btn-line btn-sm" href="#canary" data-nav="canary">Open <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </article>
+          <article class="tool-card tool-card-sm">
+            <p class="eyebrow">Fomo Radar <span class="tc-chain">HOOD</span></p>
+            <h3>Proven wallets, moving.</h3>
+            <p>The fomo.family traders who proved themselves on Robinhood Chain, read through their real wallets every 20 seconds. An alert when several enter one token within minutes.</p>
+            <a class="btn btn-line btn-sm" href="#fomo" data-nav="fomo">Open <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </article>
+        </div>
+      </section>
+
+      <section class="block wrap" aria-labelledby="h-method">
+        <div class="label-row"><span>03</span><span>Method</span></div>
+        <div class="block-head">
+          <h2 id="h-method">How a coin trends.</h2>
+          <p>The order matters. A narrative shows up in launch names first, in callers’ posts and smart wallets second, and on your timeline last. Most new tokens go to zero: the print shows where attention is heading, not what to buy.</p>
+        </div>
+        <ol class="steps">
+          <li><span class="step-n">1</span><h3>Catch the word</h3><p>Moth shows words being launched faster than usual. A word marked New or ×3 that keeps climbing is a narrative forming.</p><span class="step-tag">Moth Radar</span></li>
+          <li><span class="step-n">2</span><h3>Find callers who deliver</h3><p>Kolibri shows what every call did a minute, an hour and a day after the post. Skip the loud ones. Follow the A’s.</p><span class="step-tag">Kolibri Search</span></li>
+          <li><span class="step-n">3</span><h3>Pass the gate</h3><p>Before anything else: who holds the supply, who bought in the first block, can the mint still print. What fails never makes the feed.</p><span class="step-tag">Chameleonscope</span></li>
+          <li><span class="step-n">4</span><h3>Follow proven wallets</h3><p>On Robinhood Chain, several traders with a record entering one token within minutes says more than any post.</p><span class="step-tag">Fomo Radar</span></li>
+          <li><span class="step-n">5</span><h3>Enter on rules</h3><p>A score with its reasons written next to it, an entry only once the opening tax has decayed, the price of leaving known before you need it.</p><span class="step-tag">Loxley</span></li>
+          <li><span class="step-n">6</span><h3>Watch the door</h3><p>After the buy, the question is the exit: the deployer’s share, the reserve, the pool. LEAVE is a measured change, not a feeling.</p><span class="step-tag">Canary</span></li>
+        </ol>
+      </section>
+
+      <section class="block wrap" aria-labelledby="h-sources">
+        <div class="label-row"><span>04</span><span>Sources</span></div>
+        <div class="block-head">
+          <h2 id="h-sources">Where the print comes from.</h2>
+          <p>Public data only, read live. Nothing to connect, nothing stored about you.</p>
+        </div>
+        <ul class="sources">
+          <li><span class="src-name">pump.fun launches</span><span class="src-via">PumpPortal live stream, one connection shared</span><span class="src-tags"><b>Moth</b> <b>Chameleon</b></span></li>
+          <li><span class="src-name">Solana</span><span class="src-via">Solana RPC and Jupiter, paced</span><span class="src-tags"><b>Moth</b> <b>Chameleon</b></span></li>
+          <li><span class="src-name">Robinhood Chain</span><span class="src-via">Its public RPC through one shared queue, Blockscout</span><span class="src-tags"><b>Chameleon</b> <b>Loxley</b> <b>Canary</b> <b>Fomo</b></span></li>
+          <li><span class="src-name">X posts</span><span class="src-via">twitterapi.io or the X API, single posts through oEmbed</span><span class="src-tags"><b>Kolibri</b></span></li>
+          <li><span class="src-name">Telegram channels</span><span class="src-via">Public t.me previews, no login</span><span class="src-tags"><b>Kolibri</b></span></li>
+          <li><span class="src-name">Prices and pools</span><span class="src-via">GeckoTerminal, DexScreener, Binance</span><span class="src-tags"><b>Kolibri</b> <b>Loxley</b> <b>Fomo</b></span></li>
+          <li><span class="src-name">Smart money</span><span class="src-via">GMGN, with a key on the server</span><span class="src-tags"><b>Chameleon</b></span></li>
+        </ul>
+      </section>
+
+      <section class="block block-cta wrap" aria-labelledby="h-next">
+        <div class="label-row"><span>05</span><span>Next</span></div>
+        <h2 id="h-next" class="cta-title">Look under the pump.</h2>
+        <div class="cta-row">
+          <a class="btn btn-accent" href="#moth" data-nav="moth">Open Moth Radar <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn-line" href="#kolibri" data-nav="kolibri">Open Kolibri Search <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn-line" href="#learn" data-nav="learn">Learn how they fit together <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+        <p class="cta-note">On a wide screen any two tools open side by side: the split button sits at the top right of every tool. Kolibri and Moth also come as Chrome extensions: Kolibri puts a grade next to every caller on X and Telegram, Moth lives in your browser’s side panel. Downloads are on each tool’s page.</p>
+      </section>
+    </section>
+
+    <!-- LEARN ------------------------------------------------------------ -->
+    <section class="view" id="view-learn" data-view="learn" data-pane hidden>
+      <div class="page wrap">
+        <div class="label-row"><span>Learn</span><span>How the tools fit together</span></div>
+        <div id="learn-root"></div>
+      </div>
+    </section>
+
+    <!-- ROADMAP ---------------------------------------------------------- -->
+    <section class="view" id="view-roadmap" data-view="roadmap" hidden>
+      <div class="page wrap">
+        <div class="label-row"><span>Roadmap</span><span></span></div>
+        <h1 class="page-title">Roadmap</h1>
+        <p class="page-soon">Coming soon.</p>
+      </div>
+    </section>
+
+    <!-- KOLIBRI ---------------------------------------------------------- -->
+    <section class="view" id="view-kolibri" data-view="kolibri" data-tool data-pane hidden>
+      <div class="page wrap">
+        <div class="label-row"><span>Kolibri Search</span><span data-k-mode>Report cards for callers</span></div>
+        <div class="tool-intro">
+          <h1 class="page-title">Who called it.</h1>
+          <p>Paste an X account. Kolibri finds every token it called and measures each call: the market cap when the post went out, and what it was 1 minute, 5 minutes, 1 hour and 24 hours later.</p>
+        </div>
+
+        <form class="k-search" id="k-search" autocomplete="off">
+          <div class="seg" role="radiogroup" aria-label="Platform">
+            <button type="button" role="radio" aria-checked="true" data-platform="x">X</button>
+            <button type="button" role="radio" aria-checked="false" data-platform="tg">Telegram</button>
+          </div>
+          <label class="k-field">
+            <svg aria-hidden="true"><use href="#i-search"/></svg>
+            <input id="k-query" name="query" type="text" spellcheck="false" placeholder="x.com/handle or a link to their post" aria-label="X account, X post link or Telegram channel">
+          </label>
+          <button class="btn btn-accent" type="submit">Search</button>
+        </form>
+        <p class="k-hint" id="k-hint" hidden>Whole X accounts open once the server has an X data key. A link to a single post works now.</p>
+        <div class="k-notice" id="k-notice" hidden></div>
+
+        <div class="k-layout">
+          <div class="k-main" id="k-main" aria-live="polite"></div>
+          <aside class="k-side">
+            <section class="panel">
+              <div class="panel-head"><h2>Leaderboard</h2><div class="seg seg-sm" id="k-board-tabs" role="radiogroup" aria-label="Leaderboard platform">
+                <button type="button" role="radio" aria-checked="true" data-board="">All</button>
+                <button type="button" role="radio" aria-checked="false" data-board="x">X</button>
+                <button type="button" role="radio" aria-checked="false" data-board="tg">TG</button>
+              </div></div>
+              <ol class="board" id="k-board"></ol>
+            </section>
+            <details class="panel how">
+              <summary><h2>How grades work</h2><svg aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+              <dl>
+                <dt>A call</dt><dd>The first time an account posts a token’s $TICKER or contract address. Posts of the same token within 7 days count as one call. Posts listing more than six tokens are commentary. Reposts of other people’s posts don’t count.</dd>
+                <dt>Call mcap</dt><dd>The market cap in the minute the post went out, from 1-minute candles.</dd>
+                <dt>1m, 5m, 1h, 24h</dt><dd>The market cap that long after the post, against the call mcap: called at $20K and $40K a minute later is 2.0x; $10K is −50%. Launchpad tokens are followed into the pool they migrated to.</dd>
+                <dt>Peak 24h</dt><dd>The best 1-minute close in the first hour and 15-minute close after it, within 24 hours.</dd>
+                <dt>Grade</dt><dd>Score 0–100 from the 1-hour results: 60% the share of calls up after an hour, 40% the median 1-hour result, pulled toward 50 while there are few calls. A ≥ 75, B ≥ 62, C ≥ 50, D ≥ 38, F below. Shown once 3 calls have a 1-hour result.</dd>
+              </dl>
+            </details>
+            <section class="panel ext">
+              <h2>Kolibri for Chrome</h2>
+              <p>Puts a grade next to every caller’s name right on X and in Telegram Web, from the 24-hour and 7-day results of their calls. Hover it for the report card.</p>
+              <ol class="ext-steps">
+                <li>Download and unzip.</li>
+                <li>Open <code>chrome://extensions</code>, turn on Developer mode.</li>
+                <li>Load unpacked, pick the folder.</li>
+              </ol>
+              <a class="btn btn-line btn-sm" href="downloads/kolibri-extension.zip" data-download>Download extension <svg aria-hidden="true"><use href="#i-down"/></svg></a>
+              <p class="ext-server" data-ext-server="kolibri" hidden>Network server for the extension: <button class="copy-inline" type="button" data-copy></button></p>
+            </section>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- MOTH ------------------------------------------------------------- -->
+    <section class="view" id="view-moth" data-view="moth" data-tool data-pane hidden>
+      <div class="page wrap">
+        <div class="label-row"><span>Moth Radar</span><span class="m-status" id="m-status" data-state="connecting"><i aria-hidden="true"></i><span id="m-status-text">Connecting</span></span></div>
+        <div class="tool-intro">
+          <h1 class="page-title">What’s being launched.</h1>
+          <p>Moth reads every new token on pump.fun and counts the words in their names. When people start launching coins about the same thing, that word climbs here before the story reaches X.</p>
+        </div>
+
+        <div class="m-controls">
+          <div class="seg" id="m-windows" role="radiogroup" aria-label="Time window"></div>
+          <div class="seg" id="m-sorts" role="radiogroup" aria-label="Order">
+            <button type="button" role="radio" data-sort="top" title="Most launches first">Top</button>
+            <button type="button" role="radio" data-sort="rising" title="Fastest growing first">Rising</button>
+          </div>
+          <label class="m-filter">
+            <svg aria-hidden="true"><use href="#i-search"/></svg>
+            <input id="m-filter" type="search" placeholder="Filter words" autocomplete="off" spellcheck="false" aria-label="Filter words">
+          </label>
+          <label class="m-site">
+            <span>Open tokens on</span>
+            <select id="m-site">
+              <option value="gmgn">GMGN</option>
+              <option value="pump">pump.fun</option>
+              <option value="dexscreener">DexScreener</option>
+            </select>
+          </label>
+          <button class="icon-btn" id="m-help-open" type="button" aria-label="How to read Moth" title="How to read Moth"><svg aria-hidden="true"><use href="#i-help"/></svg></button>
+        </div>
+        <p class="m-summary" id="m-summary" aria-live="polite"></p>
+        <div class="m-notice" id="m-notice" hidden></div>
+
+        <div class="m-layout">
+          <div class="m-main">
+            <div class="m-cols" aria-hidden="true"><span>Word</span><span>Last launches</span><span>Count</span><span>Change</span><span></span></div>
+            <ol class="m-words" id="m-words"></ol>
+            <div class="m-empty" id="m-empty" hidden></div>
+          </div>
+          <aside class="m-side">
+            <section class="panel m-feed">
+              <div class="panel-head"><h2>Just launched</h2><span class="m-rate" id="m-rate"></span></div>
+              <ol class="m-feed-list" id="m-feed"></ol>
+            </section>
+            <section class="panel">
+              <h2>Watchlist</h2>
+              <p class="panel-note" id="m-watch-note">Star a word to follow it. You get a notice here when it heats up.</p>
+              <ul class="chips" id="m-watch"></ul>
+              <form class="row-form" id="m-watch-form">
+                <input id="m-watch-input" type="text" placeholder="Add a word, e.g. otter" spellcheck="false" autocomplete="off" aria-label="Word to watch">
+                <button class="btn btn-line btn-sm" type="submit">Watch</button>
+              </form>
+              <div class="m-hidden" id="m-hidden-wrap" hidden>
+                <h3>Hidden words</h3>
+                <ul class="chips" id="m-hidden"></ul>
+              </div>
+            </section>
+            <section class="panel ext">
+              <h2>Moth for Chrome</h2>
+              <p>The same radar in your browser’s side panel, with desktop alerts for watched words.</p>
+              <ol class="ext-steps">
+                <li>Download and unzip.</li>
+                <li>Open <code>chrome://extensions</code>, turn on Developer mode.</li>
+                <li>Load unpacked, pick the folder.</li>
+              </ol>
+              <a class="btn btn-line btn-sm" href="downloads/moth-extension.zip" data-download>Download extension <svg aria-hidden="true"><use href="#i-down"/></svg></a>
+              <p class="ext-server" data-ext-server="moth" hidden>Server address for the extension’s Settings: <button class="copy-inline" type="button" data-copy></button></p>
+            </section>
+          </aside>
+        </div>
+      </div>
+
+      <div class="sheet-back" id="m-help" hidden>
+        <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="m-help-title">
+          <div class="sheet-head">
+            <h2 id="m-help-title">How to read Moth</h2>
+            <button class="icon-btn" type="button" data-close-help aria-label="Close"><svg aria-hidden="true"><use href="#i-close"/></svg></button>
+          </div>
+          <ol class="help-steps">
+            <li><b>Switch to Rising and 15m.</b> Top shows words that are always big, like ai, cat and dog. Rising shows words launched faster than usual right now.</li>
+            <li><b>Look for a word that jumps.</b> It says New or ×3, its bars grow toward the right, and it keeps climbing over a few refreshes.</li>
+            <li><b>Read the line under the word.</b> That is the token with this word people are trading right now, its market cap and its move over 5 minutes. A bright dot means it traded in the last 90 seconds, a ring means it graduated to PumpSwap. Dumped tokens never show there.</li>
+            <li><b>Open the word.</b> “Trading now” lists the best tokens behind it. “Launched together with” tells you what the story is.</li>
+            <li><b>Press Search on X.</b> If nobody is posting about it yet, you are early. If everyone is, you are late.</li>
+            <li><b>Star the words you care about.</b> Moth tells you here when a watched word heats up.</li>
+          </ol>
+          <p class="fine">Moth shows what people are launching, not what to buy. Most new tokens go to zero and many are rugs, so check the token’s page, holders and developer before you trade.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAMELEONSCOPE --------------------------------------------------- -->
+    <section class="view" id="view-chameleon" data-view="chameleon" data-tool data-pane hidden>
+      <div class="page wrap">
+        <div class="label-row"><span>Chameleonscope</span><span data-c-mode>Solana · Robinhood Chain</span></div>
+        <div id="c-root"></div>
+      </div>
+    </section>
+
+    <!-- LOXLEY ----------------------------------------------------------- -->
+    <section class="view" id="view-loxley" data-view="loxley" data-tool data-pane hidden>
+      <div class="page wrap">
+        <div class="label-row"><span>Loxley</span><span data-l-mode>Pons V2 · paper</span></div>
+        <div id="l-root"></div>
+      </div>
+    </section>
+
+    <!-- CANARY ----------------------------------------------------------- -->
+    <section class="view" id="view-canary" data-view="canary" data-tool data-pane hidden>
+      <div class="page wrap">
+        <div class="label-row"><span>Canary</span><span data-y-mode>Read-only</span></div>
+        <div id="y-root"></div>
+      </div>
+    </section>
+
+    <!-- FOMO RADAR ------------------------------------------------------- -->
+    <section class="view" id="view-fomo" data-view="fomo" data-tool data-pane hidden>
+      <div class="page wrap">
+        <div class="label-row"><span>Fomo Radar</span><span data-f-mode>Robinhood Chain</span></div>
+        <div id="f-root"></div>
+      </div>
+    </section>
+
+    <!-- TELEGRAM: coming soon --------------------------------------------- -->
+    <section class="view view-soon" id="view-telegram" data-view="telegram" hidden>
+      <div class="soon-bg" aria-hidden="true"><canvas id="soon-print"></canvas></div>
+      <div class="soon-copy wrap">
+        <p class="soon-kicker"><svg aria-hidden="true"><use href="#i-plane"/></svg><span>Telegram</span></p>
+        <h1 class="soon-title"><span class="ransom" data-size="soon" data-ransom-text="Coming soon">COMING SOON</span></h1>
+        <p class="soon-lead">Our Telegram channel isn't open yet. The link goes live here when it is.</p>
+        <div class="soon-actions">
+          <a class="btn btn-line" href="#about" data-nav="about">Back to the site</a>
+        </div>
+      </div>
+    </section>
+    <div class="split-bar" id="split-bar" role="separator" aria-orientation="vertical" aria-label="Resize the two panes" tabindex="0" hidden><span></span></div>
+  </main>
+
+  <footer class="site-foot">
+    <div class="wrap foot-inner">
+      <a class="foot-mark" href="#about" data-nav="about" aria-label="Pumprint, back to top"><span class="ransom" data-ransom data-size="foot">PUMPRINT</span></a>
+      <div class="foot-row">
+        <button class="ca-pill" type="button" data-copy-ca title="Copy the contract address">
+          <span class="ca-k">CA</span><span class="ca-v" data-ca-value>Soon…pump</span><svg aria-hidden="true"><use href="#i-copy"/></svg>
+        </button>
+        <div class="socials" data-socials>
+          <button class="soc" type="button" data-social="pump" aria-label="pump.fun" title="pump.fun"><svg aria-hidden="true"><use href="#i-pill"/></svg></button>
+          <button class="soc soc-x" type="button" data-social="x" aria-label="X" title="X"><span aria-hidden="true">X</span></button>
+          <button class="soc" type="button" data-social="telegram" aria-label="Telegram" title="Telegram"><svg aria-hidden="true"><use href="#i-plane"/></svg></button>
+          <button class="soc" type="button" data-social="github" aria-label="GitHub" title="GitHub"><svg aria-hidden="true"><use href="#i-code"/></svg></button>
+        </div>
+      </div>
+      <p class="foot-fine">Not financial advice. Most new tokens go to zero. All six tools are MIT-licensed open source; nothing on this site holds a key or signs a transaction.</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>
