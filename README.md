@@ -1,55 +1,108 @@
 # Pumprint
 
-Сайт в стиле exlipse.dev: чёрная сцена, большой заголовок слева и 3D-отпечаток пальца справа. Отпечаток собран из треугольных осколков с гравировкой гребней; при наведении он разлетается, под ним светится облако точек, а наружу вылетают монеты щиткоинов, которые сейчас в тренде на Solana.
+Six open-source trench tools for pump.fun and Robinhood Chain on one website, under a 3D fingerprint you can shatter.
 
-В шапке: **About · Tools ▾ · Learn · Roadmap**. Меню **Tools** раскрывает шесть инструментов, а на странице каждого инструмента сверху есть строка вкладок, чтобы переходить между ними в один клик. Если хочется шесть плоских вкладок прямо в шапке вместо меню — это правка разметки `nav` в [`public/index.html`](public/index.html).
+![Pumprint home page: the headline "Every pump leaves a print." next to a 3D fingerprint](docs/screenshots/about.jpg)
 
-**Два инструмента на одном экране.** Справа в строке над каждым инструментом, рядом с меткой данных, есть кнопка **Split**: она открывает список остальных инструментов (и Learn), выбранный встаёт рядом. Адрес такого экрана — `#moth+kolibri` (левая сторона + правая), его можно сохранить в закладки. У каждой стороны своя прокрутка и своя строка вкладок (переключает только её сторону), кнопки ⇄ (поменять стороны местами) и × (закрыть сторону); границу между сторонами можно тянуть мышью или стрелками, двойной щелчок делит пополам, ширина запоминается. Карточки токенов открываются внутри своей стороны. Нужен экран от 1100 пикселей; на узком показывается левая сторона. Вёрстка страниц под ширину стороны делается автоматически: при первом разделении сайт повторяет свои правила `@media (max-width: …)` как container queries для каждой стороны ([`buildPaneQueries` в app.js](public/assets/js/app.js)).
+A black stage, a big headline on the left and a 3D fingerprint on the right. The print is built from triangle shards with the ridges engraved on them: hover it and it flies apart, a cloud of dots glows underneath, and the coins trending on Solana right now fly out.
 
-**Learn** — вкладка-учебник: шесть вопросов, на которые отвечают инструменты, словарь (кривая, миграция, доля дева, бандлы, налог на открытии…), по каждому инструменту — что он показывает, как читать экран, как им пользоваться и где осторожнее, затем порядок работы на сессию, риски и частые вопросы. Кнопка «Open it beside this guide» открывает инструмент рядом с учебником, и учебник сам прокручивается к его разделу.
+The header reads **About · Tools ▾ · Learn · Roadmap**. The **Tools** menu opens the six tools, and every tool page has a row of tabs at the top to switch between them in one click. If you'd rather have six flat tabs in the header instead of the menu, edit the `nav` markup in [`public/index.html`](public/index.html).
 
-| Вкладка | Сеть | Что там |
-| --- | --- | --- |
-| **About** | | Главная: 3D-отпечаток, бегущая строка трендовых монет, шесть инструментов, метод, источники данных. |
-| **Kolibri Search** | SOL | [Ridarketh/kolibri-search-](https://github.com/Ridarketh/kolibri-search-): вставляешь X-аккаунт (или один его пост, или Telegram-канал) и видишь все токены, которые он коллил: капу в момент кола и через 1 минуту, 5 минут, 1 час и 24 часа. Оценка от A до F, лидерборд. |
-| **Moth Radar** | SOL | [Ridarketh/Moth-radar](https://github.com/Ridarketh/Moth-radar): каждый новый запуск на pump.fun разбирается на слова; видно, какие слова набирают обороты за 5 / 15 / 60 минут и какой токен с этим словом торгуется. |
-| **Chameleonscope** | SOL · HOOD | [shmidtqq65/chameleonscope](https://github.com/shmidtqq65/chameleonscope): терминал траншей. Лента New / Almost bonded / Migrated для pump.fun и Pons с раг-фильтром (доля дева, бандлы, снайперы, инсайдеры, mint/freeze), собственные колы терминала с капой и пиком, смарт-кошельки и покупки KOL'ов через GMGN, квантовый радар. |
-| **Loxley** | HOOD | [shmidtqq65/loxley](https://github.com/shmidtqq65/loxley): снайпер запусков Pons V2, **на сайте только на бумаге**. Каждый запуск со счётом и причинами, заход после того как анти-снайп налог 99% упал ниже порога, отметки по точной цене выхода, выход по правилам, по сирене или когда дев двигает токены. Плюс разбор одного токена и рынок. |
-| **Canary** | HOOD | [Gipppp121/canary](https://github.com/Gipppp121/canary): сторож позиций Pons V2, только чтение. Доля дева, резерв кривой, ликвидность пула, свапы; десять правил дают QUIET / WATCH / LEAVE. Список сервера с алертами в Telegram и свой список «в этой вкладке» для любого посетителя. |
-| **Fomo Radar** | HOOD | [cvxv666/fomo-robinhood-radar](https://github.com/cvxv666/fomo-robinhood-radar): сильные трейдеры fomo.family на Robinhood Chain через их настоящие кошельки; алерт, когда несколько заходят в один токен за минуты. Проект заархивирован 6 октября 2026: на странице его архив результатов и живой радар, перенесённый на этот сайт. |
-| **Learn** | | Как работать с каждым инструментом и как они складываются в один способ торговать. |
-| **Roadmap** | | Пока пустая. |
+No tool on the site asks for or stores a private key or a seed phrase, and the site has nothing to sign transactions with.
 
-Ни один инструмент на сайте не просит и не хранит приватный ключ или сид-фразу, и подписывать транзакции сайту нечем.
+## The six tools
 
-## Запуск на своём компьютере
+<table>
+<tr>
+<td width="50%" valign="top">
+<a href="docs/screenshots/kolibri.png"><img src="docs/screenshots/kolibri.png" alt="Kolibri Search: a caller's report card with every call measured"></a>
+<p><b>Kolibri Search</b> · Solana · <a href="https://github.com/Ridarketh/kolibri-search-">Ridarketh/kolibri-search-</a><br>
+Paste an X account (or one of its posts, or a Telegram channel) and see every token it called: the market cap at the call and 1 minute, 5 minutes, 1 hour and 24 hours later. Grades from A to F and a leaderboard.</p>
+</td>
+<td width="50%" valign="top">
+<a href="docs/screenshots/moth.png"><img src="docs/screenshots/moth.png" alt="Moth Radar: the words new launches are named after"></a>
+<p><b>Moth Radar</b> · Solana · <a href="https://github.com/Ridarketh/Moth-radar">Ridarketh/Moth-radar</a><br>
+Every new pump.fun launch is split into the words of its name. See which words are picking up speed over 5, 15 and 60 minutes, and which token with that word is trading.</p>
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+<a href="docs/screenshots/chameleonscope.png"><img src="docs/screenshots/chameleonscope.png" alt="Chameleonscope: the trench terminal with its rug filter"></a>
+<p><b>Chameleonscope</b> · Solana · Robinhood Chain · <a href="https://github.com/shmidtqq65/chameleonscope">shmidtqq65/chameleonscope</a><br>
+A trench terminal. New, Almost bonded and Migrated feeds for pump.fun and Pons behind a rug filter (dev share, bundles, snipers, insiders, mint and freeze), the terminal's own calls with entry cap and peak, smart wallets and KOL buys via GMGN, and a quantum radar.</p>
+</td>
+<td width="50%" valign="top">
+<a href="docs/screenshots/loxley.png"><img src="docs/screenshots/loxley.png" alt="Loxley: the paper sniper desk"></a>
+<p><b>Loxley</b> · Robinhood Chain · <a href="https://github.com/shmidtqq65/loxley">shmidtqq65/loxley</a><br>
+A sniper for Pons V2 launches, <b>paper-only on this site</b>. Every launch gets a score and the reasons behind it; the desk enters once the 99% anti-snipe tax drops under its ceiling, marks positions at the exact price of leaving, and exits by its rules, on a siren, or when the dev moves tokens. Plus a single-token read and the market.</p>
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+<a href="docs/screenshots/canary.png"><img src="docs/screenshots/canary.png" alt="Canary: watched tokens marked QUIET, WATCH or LEAVE"></a>
+<p><b>Canary</b> · Robinhood Chain · <a href="https://github.com/Gipppp121/canary">Gipppp121/canary</a><br>
+A read-only watchdog for Pons V2 positions: dev share, curve reserve, pool liquidity, swaps. Ten rules give QUIET, WATCH or LEAVE. A server watchlist with Telegram alerts, and an "in this tab" list for any visitor.</p>
+</td>
+<td width="50%" valign="top">
+<a href="docs/screenshots/fomo.png"><img src="docs/screenshots/fomo.png" alt="Fomo Radar: the archive of results and the live radar"></a>
+<p><b>Fomo Radar</b> · Robinhood Chain · <a href="https://github.com/cvxv666/fomo-robinhood-radar">cvxv666/fomo-robinhood-radar</a><br>
+Strong fomo.family traders on Robinhood Chain, followed through their real wallets, with an alert when several of them enter one token within minutes. The project was archived on 6 October 2026; the page shows its archive of results and a live radar carried over to this site.</p>
+</td>
+</tr>
+</table>
 
-Нужен Node.js 22.13 или новее. `npm install` не нужен: всё, что нужно для работы, уже лежит в папке.
+**About** is the home page: the 3D fingerprint, a ticker of trending coins, the six tools, the method and the data sources. **Roadmap** is empty for now. The screenshots come from demo mode (`npm run demo`), so the tokens, callers and wallets in them are made up.
+
+## Two tools on one screen
+
+![Split view: Moth Radar on the left, Kolibri Search on the right](docs/screenshots/split.png)
+
+On the right of the row above every tool, next to the data badge, there's a **Split** button. It lists the other tools (and Learn), and the one you pick opens alongside. The address of such a screen is `#moth+kolibri` (left side + right side), so you can bookmark it.
+
+Each side has its own scroll and its own row of tabs (which switches only that side), plus ⇄ to swap the sides and × to close one. Drag the divider with the mouse or the arrow keys; a double-click splits the screen in half, and the width is remembered. Token cards open inside their own side. Split view needs a screen at least 1100 pixels wide; on a narrower one you get the left side.
+
+Pages fit the width of their side by themselves: on the first split, the site repeats its `@media (max-width: …)` rules as container queries for each side ([`buildPaneQueries` in app.js](public/assets/js/app.js)).
+
+## Learn
+
+![The Learn tab: the six questions the tools answer](docs/screenshots/learn.png)
+
+**Learn** is the handbook: the six questions the tools answer, a glossary (bonding curve, migration, dev share, bundles, opening tax…), and for each tool what it shows, how to read the screen, how to use it and where to be careful; then a routine for a session, the risks and an FAQ. The "Open it beside this guide" button opens a tool next to the guide, and the guide scrolls to that tool's section.
+
+## On a phone
+
+![Pumprint on a phone: home, Kolibri Search, Moth Radar and Fomo Radar](docs/screenshots/phones.jpg)
+
+Every page works on a phone; the header folds into a menu.
+
+## Run it on your computer
+
+You need Node.js 22.13 or newer. No `npm install`: everything the site needs is already in the folder.
 
 ```bash
-npm run demo     # всё на выдуманных данных, работает без интернета
-npm start        # живые данные: pump.fun, Solana, Robinhood Chain, Telegram, цены
+npm run demo     # everything on made-up data, works offline
+npm start        # live data: pump.fun, Solana, Robinhood Chain, Telegram, prices
 ```
 
-Откройте http://localhost:8080.
+Open http://localhost:8080.
 
-В демо-режиме у каждого инструмента свой выдуманный мир: Chameleonscope показывает примерные запуски, Loxley торгует на бумаге на мок-чейне loxley (запуск каждые несколько секунд), Canary следит за шестью выдуманными токенами по сценарию, где срабатывают все десять правил, Fomo Radar проигрывает выдуманные сутки.
+In demo mode each tool gets its own made-up world: Chameleonscope shows sample launches, Loxley trades on paper on the loxley mock chain (a launch every few seconds), Canary watches six made-up tokens on a scripted tape that sets off all ten rules, and Fomo Radar replays a made-up day.
 
-## Где менять название, CA и ссылки
+## Name, contract address and links
 
-Всё в одном файле: [`public/config.js`](public/config.js).
+All in one file, [`public/config.js`](public/config.js):
 
 ```js
-name: 'PUMPRINT',          // буквы-вырезки в шапке и подвале
-contractAddress: '',       // пока пусто, в шапке "Soon…pump"
-links: { pump: '', x: '', telegram: '', github: '' },  // кнопки соцсетей
+name: 'PUMPRINT',          // cut-out letters in the header and footer
+contractAddress: '',       // empty for now: the header shows "Soon…pump"
+links: { pump: '', x: '', telegram: '', github: '' },  // social buttons
 ```
 
-Пока ссылка пустая, кнопка по клику пишет «Link coming soon». Исключение — Telegram: без ссылки кнопка открывает страницу сайта `#telegram` с надписью «Coming soon» на фоне большого тёмного размытого отпечатка.
+While a link is empty, its button shows "Link coming soon" when clicked. The exception is Telegram: without a link, the button opens the site's `#telegram` page, "Coming soon" over a big, dark, blurred fingerprint.
 
-## Деплой
+## Deploy
 
-Сайт — это один Node-процесс: он отдаёт страницы, держит одно подключение к pump.fun для Moth и Chameleonscope, одну очередь запросов к Robinhood Chain для всех инструментов этой сети и базы SQLite. Подойдёт любой хостинг, где процесс работает постоянно: VPS, Railway, Render (платный инстанс), Fly.io. Хостинги, которые «усыпляют» приложение, теряют живые потоки на время сна. Памяти лучше дать от 1 ГБ: терминал Chameleonscope работает в отдельном потоке и сам перезапускается выше `CHAMELEON_MEMORY_MB`.
+The site is one Node process: it serves the pages and keeps one connection to pump.fun for Moth and Chameleonscope, one request queue to Robinhood Chain for every tool on that chain, and the SQLite databases. Any host that keeps the process running will do: a VPS, Railway, Render (a paid instance), Fly.io. Hosts that put apps to sleep lose the live streams while asleep. Give it 1 GB of memory or more: the Chameleonscope terminal runs in its own thread and restarts itself above `CHAMELEON_MEMORY_MB`.
 
 **Docker:**
 
@@ -58,126 +111,127 @@ docker build -t pumprint .
 docker run -d --restart unless-stopped -p 8080:8080 -v pumprint-data:/app/data --env-file .env pumprint
 ```
 
-**Railway / Render:** подключите репозиторий, команда запуска `npm start`, порт берётся из `PORT`. Добавьте постоянный диск на `/app/data` (или укажите `DATA_DIR`), чтобы базы и история переживали перезапуски.
+**Railway / Render:** connect the repository; the start command is `npm start` and the port comes from `PORT`. Add a persistent disk at `/app/data` (or set `DATA_DIR`) so the databases and history survive restarts.
 
-Поставьте сайт за HTTPS (у PaaS это по умолчанию), тогда Moth работает по `wss://`.
+Put the site behind HTTPS (PaaS hosts do this by default); Moth then runs over `wss://`.
 
-## Инструменты Robinhood Chain
+## Robinhood Chain tools
 
-Chameleonscope, Loxley, Canary и Fomo Radar читают Robinhood Chain (id 4663) через **одну общую очередь** ([`server/hood/rpc.js`](server/hood/rpc.js)): публичная нода ограничивает частоту запросов, поэтому инструменты делят один бюджет, а не соревнуются за него. Очередь разносит запросы по времени, пережидает ответы 429, спрашивает запасные адреса из `HOOD_RPC_SPARES` и делит слишком большие диапазоны логов пополам. Ключ для публичной ноды не нужен.
+Chameleonscope, Loxley, Canary and Fomo Radar read Robinhood Chain (chain id 4663) through **one shared queue** ([`server/hood/rpc.js`](server/hood/rpc.js)). The public node limits the request rate, so the tools share one budget instead of competing for it. The queue spaces requests out, waits out 429 responses, tries the backup addresses in `HOOD_RPC_SPARES`, and halves log ranges that are too large. The public node needs no key.
 
-### Loxley — только бумага
+### Loxley: paper only
 
-На сайте Loxley работает **только в бумажном режиме и только на чтение**:
+On this site Loxley runs **in paper mode only, and only reads**:
 
-- сайт загружает из loxley модули чтения, оценки и бумажного снайпера, но никогда — `cli/wallet.js` и `cli/trade.js`: их место в кэше модулей занимают заглушки, которые бросают ошибку при любом обращении ([`server/loxley/safe.js`](server/loxley/safe.js));
-- вместо viem loxley получает урезанный набор (кодек ABI и единицы) без клиента кошелька, аккаунтов и сид-фраз;
-- окружение для loxley собирается только из его значений по умолчанию и разрешённых `LOXLEY_*`: `PRIVATE_KEY`, `MNEMONIC` и пароль хранилища всегда пустые, файл `.env` loxley не читается;
-- все запросы к ноде идут через мост, который пропускает только методы чтения;
-- у API нет ни одного маршрута, кроме GET; `/api/loxley/health` показывает, что заглушки на месте.
+- the site loads loxley's read, scoring and paper-sniper modules, but never `cli/wallet.js` or `cli/trade.js`: their place in the module cache is taken by stand-ins that throw on any use ([`server/loxley/safe.js`](server/loxley/safe.js));
+- instead of viem, loxley gets a cut-down set (the ABI codec and units) with no wallet client, accounts or seed phrases;
+- loxley's environment is built only from its defaults and the allowed `LOXLEY_*` variables: `PRIVATE_KEY`, `MNEMONIC` and the keystore password are always empty, and loxley's own `.env` file is never read;
+- every request to the node goes through a bridge that lets only read methods through;
+- the API has GET routes only; `/api/loxley/health` shows that the stand-ins are in place.
 
-Настоящие сделки — это командная строка loxley на вашем компьютере, с отдельным кошельком: `git clone https://github.com/shmidtqq65/loxley && cd loxley && node bin/loxley.js tour`.
+Real trades are loxley's command line on your own computer, with a separate wallet: `git clone https://github.com/shmidtqq65/loxley && cd loxley && node bin/loxley.js tour`.
 
-**Темп.** Loxley рассчитан на одного человека со своим RPC: опрос каждые полсекунды. На сайте, деля публичную ноду с другими инструментами, он работает медленнее: новые запуски раз в 2 секунды, одна проверка через минуту, отметки позиций раз в 15 секунд, не больше двух открытых. `LOXLEY_RPC_URL` (свой провайдер: Alchemy, QuickNode) возвращает ему темп командной строки на этом адресе. `LOXLEY_EXPLORER_API_KEY` (бесплатный ключ Blockscout) включает рентген деплоера. Правила бумажного снайпера меняются переменными loxley с префиксом `LOXLEY_` (`LOXLEY_MIN_SCORE`, `LOXLEY_TAX_CEILING_BPS`, `LOXLEY_TAKE_PROFIT_PCT`…); `LOXLEY_FOLLOW` — кошельки, чьи покупки бумажный стол повторяет.
+**Pace.** Loxley is built for one person with their own RPC: it polls every half second. Here, sharing the public node with the other tools, it runs slower: new launches every 2 seconds, one follow-up check a minute later, position marks every 15 seconds, at most two positions open. `LOXLEY_RPC_URL` (your own provider: Alchemy, QuickNode) gives it the command line's pace on that address. `LOXLEY_EXPLORER_API_KEY` (a free Blockscout key) turns on the deployer X-ray. The paper sniper's rules are loxley's own variables with a `LOXLEY_` prefix (`LOXLEY_MIN_SCORE`, `LOXLEY_TAX_CEILING_BPS`, `LOXLEY_TAKE_PROFIT_PCT`…); `LOXLEY_FOLLOW` lists wallets whose buys the paper desk copies.
 
 ### Canary
 
-- **Список сервера**: токены из `CANARY_TOKENS` и позиции кошельков из `CANARY_WALLETS` (их Canary находит среди недавних запусков). Сервер сравнивает каждую проверку с предыдущей, помнит историю на диске и шлёт алерты в Telegram (`CANARY_TELEGRAM_TOKEN`, `CANARY_TELEGRAM_CHAT_ID`).
-- **Менять список со страницы** может только владелец сайта: с ключом `CANARY_CONTROL_TOKEN` (вводится в поле «Operator», хранится до закрытия вкладки) или без ключа, если сайт слушает только `127.0.0.1` (`HOST=127.0.0.1`) — то есть запущен у вас на компьютере. Это правило самого Canary.
-- **В этой вкладке**: любой посетитель может держать до пяти своих токенов. Страница читает их раз в минуту через сервер и прогоняет те же десять правил Canary прямо в браузере (они собраны из его исходника), сравнивая с прошлым чтением. Список хранится только в браузере.
-- Разовый скан любого токена ограничен по частоте (12 в минуту с адреса, 60 на всех) и кэшируется на 15 секунд.
-- Если в окружении сервера есть `PRIVATE_KEY`, `SECRET_KEY`, `MNEMONIC`, `SEED_PHRASE` или `WALLET_PRIVATE_KEY`, Canary отказывается работать — как и в оригинале.
+- **The server's watchlist**: tokens from `CANARY_TOKENS` and wallet positions from `CANARY_WALLETS` (Canary finds those among recent launches). The server compares every sweep with the previous one, keeps the history on disk and sends alerts to Telegram (`CANARY_TELEGRAM_TOKEN`, `CANARY_TELEGRAM_CHAT_ID`).
+- **Only the site owner can change that list from the page**: with the `CANARY_CONTROL_TOKEN` key (typed into the "Operator" field and kept until the tab closes), or without a key when the site listens only on `127.0.0.1` (`HOST=127.0.0.1`), that is, when it runs on your own computer. This is Canary's own rule.
+- **In this tab**: any visitor can keep up to five tokens of their own. The page reads them once a minute through the server and runs the same ten Canary rules right in the browser (built from Canary's source), comparing each read with the last one. The list lives only in the browser.
+- A one-off scan of any token is rate-limited (12 a minute per address, 60 across everyone) and cached for 15 seconds.
+- If the server's environment holds `PRIVATE_KEY`, `SECRET_KEY`, `MNEMONIC`, `SEED_PHRASE` or `WALLET_PRIVATE_KEY`, Canary refuses to run, just like the original.
 
 ### Fomo Radar
 
-Проект заархивирован 6 октября 2026: его сайт и бот выключены, остались код и архив результатов. Страница показывает:
+The project was archived on 6 October 2026: its site and bot are off, and the code and the archive of results remain. The page shows:
 
-- **архив**: по подсчёту автора, $100 в каждый алерт-всплеск дали бы **+$1,030 за 67 алертов**, а те же $100 в каждый алерт по новым запускам — **−$1,205 за 90 алертов** (замер через час). Цифры пересчитаны здесь из журнала алертов проекта и совпадают с его `summary.json`. Под ними оговорки: три сделки делают почти весь результат всплесков, и что остаётся без «засеянных», мёртвых и непродаваемых;
-- **живой радар**: тот же список кошельков читается с ноды каждые 20 секунд, всплеск — сумма (score/100)² ≥ 4 от трёх и более доверенных кошельков за 30 минут, с теми же проверками перед алертом. Ключ не нужен. Алерты в Telegram — `FOMO_TELEGRAM_BOT_TOKEN`, `FOMO_TELEGRAM_CHAT_ID`.
+- **the archive**: by the author's count, $100 into every burst alert would have made **+$1,030 over 67 alerts**, and the same $100 into every new-launch alert **−$1,205 over 90 alerts** (measured an hour later). The numbers are recomputed here from the project's alert log and match its `summary.json`. Under them are the caveats: three trades make almost all of the burst result, and what's left without the "seeded", dead and unsellable tokens;
+- **the live radar**: the same wallet list is read from the node every 20 seconds; a burst is a sum of (score/100)² ≥ 4 from three or more trusted wallets within 30 minutes, with the same checks before an alert. No key needed. Telegram alerts: `FOMO_TELEGRAM_BOT_TOKEN`, `FOMO_TELEGRAM_CHAT_ID`.
 
-Адреса кошельков, тексты оценок и PnL трейдеров на страницу не выводятся. Одноимённый репозиторий у bl888m — просто форк.
+Wallet addresses, score texts and traders' PnL are not shown on the page. The repository of the same name under bl888m is only a fork.
 
 ### Chameleonscope
 
-Движок терминала работает без изменений в отдельном потоке сервера. Поток запусков pump.fun он берёт из того же подключения, что и Moth, запросы к Solana RPC идут не чаще `CHAMELEON_RPC_RPS` в секунду. Смарт-кошельки и покупки KOL'ов требуют `GMGN_API_KEY`; без ключа эта панель честно пишет, что выключена, всё остальное работает.
+The terminal's engine runs unchanged in its own server thread. It takes the pump.fun launch stream from the same connection as Moth, and its Solana RPC requests go no faster than `CHAMELEON_RPC_RPS` per second. Smart wallets and KOL buys need `GMGN_API_KEY`; without it that panel says plainly that it's off, and everything else works.
 
-## Kolibri и X
+## Kolibri and X
 
-Что работает сразу, без ключей:
+Works right away, without keys:
 
-- ссылка на **один пост** в X (`x.com/имя/status/…`) — пост читается через публичный oEmbed X;
-- **Telegram-каналы** (публичные, с превью на `t.me/s/…`).
+- a link to **one post** on X (`x.com/name/status/…`): the post is read through X's public oEmbed;
+- **Telegram channels** (public ones, with a preview at `t.me/s/…`).
 
-Чтобы искать **целые X-аккаунты**, серверу нужен один ключ к данным X. Бесплатного способа читать ленту X нет:
+To look up **whole X accounts**, the server needs one key for X data. There's no free way to read an X timeline:
 
-| Ключ | Цена | Один первый поиск |
+| Key | Price | One first lookup |
 | --- | --- | --- |
-| `TWITTERAPI_IO_KEY` — [twitterapi.io](https://twitterapi.io), рекомендуемый | около $0.15 за 1000 твитов | до ~100 твитов ≈ $0.015 |
-| `X_BEARER_TOKEN` — официальный X API, pay-per-use | $0.005 за каждый прочитанный пост | до 200 постов ≈ до $1 |
+| `TWITTERAPI_IO_KEY`: [twitterapi.io](https://twitterapi.io), recommended | about $0.15 per 1,000 tweets | up to ~100 tweets ≈ $0.015 |
+| `X_BEARER_TOKEN`: the official X API, pay-per-use | $0.005 per post read | up to 200 posts ≈ up to $1 |
 
-Повторный поиск того же аккаунта в течение 10 минут бесплатный, позже читаются только новые посты. `X_LOOKUPS_PER_DAY` (по умолчанию 500) ограничивает чтения аккаунтов в сутки на всех посетителей.
+Looking up the same account again within 10 minutes is free; after that only new posts are read. `X_LOOKUPS_PER_DAY` (500 by default) caps account reads per day across all visitors.
 
-Капу считаем по минутным свечам GeckoTerminal. Бесплатно это около 10 запросов в минуту, поэтому длинная история колера досчитывается несколько минут; бесплатный ключ `COINGECKO_DEMO_KEY` ускоряет это примерно втрое.
+Market caps come from GeckoTerminal's one-minute candles. Free, that's about 10 requests a minute, so a caller's long history takes a few minutes to fill in; a free `COINGECKO_DEMO_KEY` makes it about three times faster.
 
-## Настройки
+## Settings
 
-Скопируйте [`.env.example`](.env.example) в `.env`: там описана каждая переменная. Самое полезное:
+Copy [`.env.example`](.env.example) to `.env`: every variable is described there. The most useful ones:
 
-| Переменная | Зачем |
+| Variable | What for |
 | --- | --- |
-| `TWITTERAPI_IO_KEY` или `X_BEARER_TOKEN` | Ключ к данным X для поиска целых X-аккаунтов в Kolibri. |
-| `TRACK_X`, `TRACK` | X-аккаунты и Telegram-каналы, которые Kolibri читает круглосуточно (лидерборд). |
-| `COINGECKO_DEMO_KEY` | Свечи для капы в Kolibri приходят в несколько раз быстрее. |
-| `SOLANA_RPC_URL` | Свой Solana RPC (Helius, QuickNode) стабильнее публичного для Moth и Chameleonscope. |
-| `GMGN_API_KEY` | Смарт-кошельки и покупки KOL'ов в Chameleonscope. |
-| `HOOD_RPC_URL`, `HOOD_RPC_SPARES` | Robinhood Chain для всех инструментов этой сети. По умолчанию публичная нода. |
-| `LOXLEY_RPC_URL` | Свой RPC только для Loxley: темп командной строки. |
-| `CANARY_TOKENS`, `CANARY_WALLETS`, `CANARY_TELEGRAM_*`, `CANARY_CONTROL_TOKEN` | Список сервера Canary, алерты и ключ владельца. |
-| `FOMO_TELEGRAM_BOT_TOKEN`, `FOMO_TELEGRAM_CHAT_ID`, `SITE_URL` | Алерты Fomo Radar в Telegram. |
-| `CHAMELEON=0`, `LOXLEY=0`, `CANARY=0`, `FOMO=0` | Выключить инструмент на сервере. |
-| `HOLDER_MINT`, `HOLDER_SYMBOL`, `FREE_WINDOWS`, `ACCESS_SECRET` | Доступ для холдеров вашего токена к окнам Moth 5m и 15m. |
-| `KOLIBRI_NETWORK=1` | Исходный сетевой сервер Kolibri на `/kolibri` для сетевого режима расширения. |
+| `TWITTERAPI_IO_KEY` or `X_BEARER_TOKEN` | X data, to look up whole X accounts in Kolibri. |
+| `TRACK_X`, `TRACK` | X accounts and Telegram channels Kolibri reads around the clock (the leaderboard). |
+| `COINGECKO_DEMO_KEY` | Candles for Kolibri's market caps arrive several times faster. |
+| `SOLANA_RPC_URL` | Your own Solana RPC (Helius, QuickNode), steadier than the public one for Moth and Chameleonscope. |
+| `GMGN_API_KEY` | Smart wallets and KOL buys in Chameleonscope. |
+| `HOOD_RPC_URL`, `HOOD_RPC_SPARES` | Robinhood Chain for every tool on that chain. The public node by default. |
+| `LOXLEY_RPC_URL` | Your own RPC for Loxley only: the command line's pace. |
+| `CANARY_TOKENS`, `CANARY_WALLETS`, `CANARY_TELEGRAM_*`, `CANARY_CONTROL_TOKEN` | Canary's server watchlist, alerts and owner key. |
+| `FOMO_TELEGRAM_BOT_TOKEN`, `FOMO_TELEGRAM_CHAT_ID`, `SITE_URL` | Fomo Radar alerts in Telegram. |
+| `CHAMELEON=0`, `LOXLEY=0`, `CANARY=0`, `FOMO=0` | Turn a tool off on the server. |
+| `HOLDER_MINT`, `HOLDER_SYMBOL`, `FREE_WINDOWS`, `ACCESS_SECRET` | Access to Moth's 5m and 15m windows for holders of your token. |
+| `KOLIBRI_NETWORK=1` | Kolibri's original network server at `/kolibri`, for the extension's network mode. |
 
-## Как это устроено
+## How it's built
 
 ```
-server/index.js            один сервер: сайт и шесть инструментов
-server/hood/rpc.js         общая очередь запросов к Robinhood Chain
-server/pumptee.js          одно подключение к PumpPortal на Moth и Chameleonscope
-server/moth.js             Moth под /moth (REST и WebSocket /moth/ws)
-server/kolibri.js, kol/    Kolibri: /api/kolibri, по желанию исходный сервер /kolibri
-server/chameleon/          движок Chameleonscope в отдельном потоке: /api/chameleon
-server/loxley/             Loxley на бумаге: заглушки ключей (safe.js), бумажный стол, чтения, демо-мир: /api/loxley
-server/canary/             Canary: движок (engine.mjs, собран из исходника), страж RPC (viem-shim.mjs), /api/canary
-server/fomo/               Fomo Radar: чтение кошельков, правила всплеска, замер через час, демо: /api/fomo
-vendor/                    код репозиториев без изменений: kolibri, moth, chameleonscope, loxley, canary, fomo
-vendor/viem                viem 2.56.3 одним файлом (из loxley), общий для Loxley и Canary
-public/                    сам сайт: index.html, assets/css, assets/js/<инструмент>/page.js, assets/js/learn/page.js
-scripts/                   сборка движка Canary и примерных данных для режима без сервера
+server/index.js            one server: the site and the six tools
+server/hood/rpc.js         the shared request queue to Robinhood Chain
+server/pumptee.js          one PumpPortal connection for Moth and Chameleonscope
+server/moth.js             Moth under /moth (REST and the /moth/ws WebSocket)
+server/kolibri.js, kol/    Kolibri: /api/kolibri, optionally the original server at /kolibri
+server/chameleon/          the Chameleonscope engine in its own thread: /api/chameleon
+server/loxley/             Loxley on paper: key stand-ins (safe.js), the paper desk, reads, demo world: /api/loxley
+server/canary/             Canary: the engine (engine.mjs, built from source), the RPC guard (viem-shim.mjs), /api/canary
+server/fomo/               Fomo Radar: wallet reads, burst rules, the one-hour measure, demo: /api/fomo
+vendor/                    the tools' own code: kolibri, moth, chameleonscope, loxley, canary, fomo
+vendor/viem                viem 2.56.3 in one file (from loxley), shared by Loxley and Canary
+public/                    the site itself: index.html, assets/css, assets/js/<tool>/page.js, assets/js/learn/page.js
+scripts/                   builds Canary's engine and the sample data for serverless mode
+docs/screenshots/          the pictures in this README
 ```
 
-Все изменения кода репозиториев перечислены: в `vendor/loxley/vendor/viem.js` одна строка ссылается на общий `vendor/viem/viem.cjs` (файл байт в байт тот же). Canary собирается из `vendor/canary/src` командой `npm run build:canary` (нужен esbuild: `npm i --no-save esbuild`); `npm run test:canary` прогоняет 46 собственных тестов Canary на той же сборке.
+The tools' code is used as published. The one edit: a line in `vendor/loxley/vendor/viem.js` points to the shared `vendor/viem/viem.cjs` (byte for byte the same file). The short `package.json` files in `vendor/kolibri`, `vendor/moth` and `vendor/chameleonscope` only tell Node how to load that code, and `vendor/fomo` holds Fomo Radar's archive, fixtures and cases (its Python radar is ported to Node in `server/fomo/`). Canary is built from `vendor/canary/src` with `npm run build:canary` (needs esbuild: `npm i --no-save esbuild`); `npm run test:canary` runs Canary's own 46 tests against the same build.
 
-## Без сервера
+## Without a server
 
-Папку `public/` можно залить на статический хостинг (Netlify, Vercel, Cloudflare Pages, GitHub Pages). Пути к файлам в странице относительные, так что сайт работает и из подпапки вроде `ваш-ник.github.io/pumprint/`. Без сервера:
+The `public/` folder can go on a static host (Netlify, Vercel, Cloudflare Pages, GitHub Pages). Paths in the page are relative, so the site also works from a subfolder such as `your-name.github.io/pumprint/`. Without a server:
 
-- Moth читает pump.fun прямо из браузера посетителя; Kolibri показывает примерных колеров;
-- Chameleonscope, Loxley, Canary и Fomo Radar показывают записанные примеры с пометкой Sample / Recorded: читать цепочки может только сервер. Архив Fomo Radar показывается целиком — он лежит в самой странице.
+- Moth reads pump.fun straight from the visitor's browser; Kolibri shows sample callers;
+- Chameleonscope, Loxley, Canary and Fomo Radar show recorded samples marked Sample / Recorded, since only a server can read the chains. Fomo Radar's archive is shown in full: it's built into the page.
 
-## Отпечаток
+## The fingerprint
 
-Логотип в шапке — символ `#i-print` в [`public/index.html`](public/index.html): гребни-арки вокруг петли в центре, с разрывами и разной длиной концов, как у настоящего отпечатка. Во вкладке браузера — [`public/favicon.svg`](public/favicon.svg): тот же рисунок без внешней дуги и с линиями потолще, чтобы читался в 16 пикселях. Фон страницы Telegram — [`public/assets/js/soon.js`](public/assets/js/soon.js). Большой 3D-отпечаток — [`public/assets/js/print3d.js`](public/assets/js/print3d.js).
+The header logo is the `#i-print` symbol in [`public/index.html`](public/index.html): ridge arches around a loop in the middle, with breaks and ends of different lengths, like a real print. The browser tab uses [`public/favicon.svg`](public/favicon.svg), the same drawing without the outer arc and with heavier lines so it reads at 16 pixels. The Telegram page background is [`public/assets/js/soon.js`](public/assets/js/soon.js), and the big 3D fingerprint is [`public/assets/js/print3d.js`](public/assets/js/print3d.js).
 
-## Проверка
+## Tests
 
 ```bash
-npm test     # сайт в демо-режиме: все эндпоинты шести инструментов, правила Canary на мок-чейне,
-             # запрет ключей и подписи в Loxley, парсеры Fomo на настоящих ответах ноды
+npm test     # the site in demo mode: every endpoint of the six tools, Canary's rules on a mock chain,
+             # Loxley's key and signing lockout, Fomo's parsers on real node responses
 ```
 
-## Лицензии
+## Licenses
 
-Все шесть инструментов — MIT: файлы `vendor/*/LICENSE`. viem и пакеты внутри `vendor/viem/viem.cjs` — MIT, уведомления в `vendor/viem/LICENSES.md`. three.js — MIT (`public/assets/vendor/three.LICENSE.txt`). Moth и Chameleonscope читают запуски через PumpPortal, неофициальный API pump.fun. Инструменты Robinhood Chain не связаны с Robinhood, Pons, Uniswap и fomo.family.
+All six tools are MIT: see `vendor/*/LICENSE`. viem and the packages inside `vendor/viem/viem.cjs` are MIT, with notices in `vendor/viem/LICENSES.md`. three.js is MIT (`public/assets/vendor/three.LICENSE.txt`). Moth and Chameleonscope read launches through PumpPortal, an unofficial pump.fun API. The Robinhood Chain tools are not affiliated with Robinhood, Pons, Uniswap or fomo.family.
 
-Сайт показывает, что запускают, кто коллил и что делают кошельки, а не что покупать. Большинство новых токенов уходит в ноль.
+The site shows what's being launched, who called it and what wallets are doing, not what to buy. Most new tokens go to zero.
