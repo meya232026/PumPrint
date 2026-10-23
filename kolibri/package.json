@@ -1,0 +1,6 @@
+{
+  "name": "kolibri-vendored",
+  "private": true,
+  "type": "commonjs",
+  "license": "MIT"
+}
